@@ -11,5 +11,5 @@ public class CoursesHippiquesApplication {
 	}
 
 
-	// test YD
+	// test Git
 }

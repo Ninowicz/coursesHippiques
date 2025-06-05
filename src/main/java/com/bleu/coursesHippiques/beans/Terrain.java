@@ -42,9 +42,7 @@ public class Terrain {
     // Constructeurs
 
 
-    // public Terrain() {}
-    // Pas besoin de constructeur par defaut ?
-
+    public Terrain() {}
 
     // Un terrain a son nom, sa longueur et son type de terrain,
     // La météo et le taux de blessures seront parametrés plus tard.

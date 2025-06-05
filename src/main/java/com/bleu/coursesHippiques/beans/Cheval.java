@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -34,13 +36,34 @@ public class Cheval {
 
 
     // Methodes
-
     private int randomInt(int min, int max) {
         return (int) (Math.random() * (max - min + 1)) + min;
     }
 
     private double randomDouble(double min, double max) {
         return (Math.random() * (max - min)) + min;
+    }
+
+    private String randomNom (){
+        List<String> noms = Arrays.asList(
+                "Tonnerre", "Flamme", "Éclair", "Brume", "Soleil",
+                "Dragon", "Comète", "Mirage", "Fantôme", "Vent",
+                "Rubis", "Saphir", "Prince", "Baron", "Corsaire",
+                "Lame", "Galop", "Cyclone", "Spectre", "Flèche"
+        );
+
+        List<String> adjectifs = Arrays.asList(
+                "Sauvage", "Silencieux", "Ardent", "Céleste", "Nocturne",
+                "Pourpre", "Hurlant", "Agile", "Foudroyant", "Sombre",
+                "Radieux", "Ténébreux", "Vif", "Doré", "Glacial",
+                "Vaillant", "Brillant", "Rapide", "Rouge", "Loyal"
+        );
+
+        Random rand = new Random();
+        String nomRandom = noms.get(rand.nextInt(noms.size()));
+        String adjectifRandom = adjectifs.get(rand.nextInt(adjectifs.size()));
+
+        return nomRandom + " " + adjectifRandom;
     }
 
 
@@ -96,8 +119,8 @@ public class Cheval {
 
     // Constructeurs
 
-    public Cheval(String nom) {
-        this.nom = nom;
+    public Cheval() {
+        this.nom = randomNom();
         this.age = randomInt(2, 10);
         this.race = Race.raceAleatoire();
         this.taille = randomDouble(1.5, 1.8);
@@ -110,9 +133,6 @@ public class Cheval {
         this.couleurDesYeux = CouleurDesYeux.couleurAleatoire();
         this.typeDeFer = TypeDeFer.typeDeFerAleatoire();
         this.etatDuCheval = EtatDuCheval.EnForme;
-    }
-
-    public Cheval() {
     }
 
     // Getter Setters

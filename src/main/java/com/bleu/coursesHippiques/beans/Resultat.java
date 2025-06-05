@@ -1,9 +1,6 @@
 package com.bleu.coursesHippiques.beans;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ public class Resultat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idResultat;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> classementListeCheval;
     private boolean pariGagne;
     private double gainJoueur;

@@ -16,7 +16,7 @@ public class Cheval {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     // Attributs
-    private int idCheval;
+    private long idCheval;
     private String nom;
     private int age;
     private Race race;
@@ -66,6 +66,32 @@ public class Cheval {
         return nomRandom + " " + adjectifRandom;
     }
 
+
+    // to String
+
+
+    @Override
+    public String toString() {
+        return "Cheval{" +
+                "idCheval=" + idCheval +
+                ", nom='" + nom + '\'' +
+                ", age=" + age +
+                ", race=" + race +
+                ", taille=" + taille +
+                ", poids=" + poids +
+                ", vitesseMax=" + vitesseMax +
+                ", acceleration=" + acceleration +
+                ", nbCourseGagnees=" + nbCourseGagnees +
+                ", couleurDeLaRobe=" + couleurDeLaRobe +
+                ", pedigree=" + pedigree +
+                ", couleurDesYeux=" + couleurDesYeux +
+                ", typeDeFer=" + typeDeFer +
+                ", tempsRealise=" + tempsRealise +
+                ", etatDuCheval=" + etatDuCheval +
+                ", malus=" + malus +
+                ", cote=" + cote +
+                '}';
+    }
 
     // Enums
     public enum CouleurDesYeux {
@@ -137,11 +163,11 @@ public class Cheval {
 
     // Getter Setters
 
-    public int getIdCheval() {
+    public long getIdCheval() {
         return idCheval;
     }
 
-    public void setIdCheval(int idCheval) {
+    public void setIdCheval(long idCheval) {
         this.idCheval = idCheval;
     }
 

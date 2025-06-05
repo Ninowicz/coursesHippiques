@@ -1,4 +1,9 @@
 package com.bleu.coursesHippiques.repositories;
 
-public interface ChevalRepository {
+import com.bleu.coursesHippiques.beans.Cheval;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ChevalRepository extends JpaRepository<Cheval, Integer> {
+
+
 }

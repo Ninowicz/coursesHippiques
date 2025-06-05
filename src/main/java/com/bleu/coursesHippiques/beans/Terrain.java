@@ -1,13 +1,30 @@
 package com.bleu.coursesHippiques.beans;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
+@Entity
 public class Terrain {
+
+    public enum typTerrain{
+        herbe,
+        sable,
+        fibre
+    }
+
 
     // Attributs
 
-    protected String meteo; // (enum ?)
-    protected String type; // (enum ?)
-    protected int tauxDeBlessure;
-    protected int longueur;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private String meteo; // (enum ?)
+    private String typeTerrain; // (enum ?)
+    private int tauxDeBlessure;
+    private int longueur;
 
     // type :
     // type : Plat - Trot - Haies - Obstacles (peut etre en prendre que 3)

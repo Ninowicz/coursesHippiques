@@ -75,7 +75,9 @@ public class Course {
             double malusBlessure = 0;
             double malusCouleurYeuxTerrain = 0;
             double malusFerTerrain = 0;
-
+            //* Premiere ligne malus en fonction de l'age, max age = 10 => malus max
+            //* Deuxieme ligne malus en fonction du ration Poids/Taille (fct affine ax + b)
+            //* Troisieme ligne malus globaux
             double malus =  (Math.exp((double) cheval.getAge() /10)-Math.exp((double) 2 /10))/10 +
                     Math.abs(a*cheval.getPoids() + b - cheval.getTaille())/10  +
                     malusBlessure + malusCouleurYeuxTerrain  + malusFerTerrain;

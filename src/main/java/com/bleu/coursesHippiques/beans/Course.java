@@ -23,6 +23,8 @@ public class Course {
     //Rajout OneToMany
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> listeCheval;
+
+    @ManyToOne
     private Terrain terrain;
 
     // Getters & Setters

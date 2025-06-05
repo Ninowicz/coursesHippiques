@@ -46,6 +46,7 @@ public class Terrain {
 
 
     // public Terrain() {}
+    // Pas besoin de constructeur par defaut ?
 
 
     // Un terrain a son nom, sa longueur et son type de terrain,
@@ -156,6 +157,10 @@ public class Terrain {
     // Getter Setter
 
 
+    public String getNomTerrain() {
+        return nomTerrain;
+    }
+
     public meteo getMeteoCourse() {
         return meteoCourse;
     }
@@ -186,5 +191,9 @@ public class Terrain {
 
     public void setLongueur(int longueur) {
         this.longueur = longueur;
+    }
+
+    public void setNomTerrain(String nomTerrain) {
+        this.nomTerrain = nomTerrain;
     }
 }

@@ -16,7 +16,7 @@ public class Joueur {
     private String username;
     private String password;
 
-    private int argent;
+    private double argent;
 
 
     // Constructeurs
@@ -40,7 +40,7 @@ public class Joueur {
         return password;
     }
 
-    public int getArgent() {
+    public double getArgent() {
         return argent;
     }
 

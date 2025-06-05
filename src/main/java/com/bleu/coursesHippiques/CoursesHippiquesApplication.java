@@ -7,7 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CoursesHippiquesApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(CoursesHippiquesApplication.class, args);
+
+
+		System.out.println("programme lancé");
+
+
 	}
 
 	// test tommy

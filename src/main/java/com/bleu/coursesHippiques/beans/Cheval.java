@@ -69,7 +69,6 @@ public class Cheval {
 
     // to String
 
-
     @Override
     public String toString() {
         return "Cheval{" +

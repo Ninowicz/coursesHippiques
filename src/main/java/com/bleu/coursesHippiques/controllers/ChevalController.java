@@ -3,6 +3,7 @@ package com.bleu.coursesHippiques.controllers;
 
 import com.bleu.coursesHippiques.beans.Cheval;
 import com.bleu.coursesHippiques.repositories.ChevalRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,16 +20,24 @@ public class ChevalController {
     }
 
     @PostMapping("ajouterCheval")
-    public String ajouterCheval() {
+    public ResponseEntity<Cheval> ajouterCheval() {
         Cheval cheval = new Cheval();
         chevalRepository.save(cheval);
-        System.out.println(cheval.toString());
-        return "Cheval " + cheval.getNom() + " sauvegardé avec l'ID " + cheval.getIdCheval();
+        System.out.println(cheval.getNom() + " a ete ajoute. ID : " + cheval.getIdCheval());
+        return ResponseEntity.ok(cheval);
     }
 
     @GetMapping("recupererCheval")
-    public List<Cheval> recupererCheval() {
-        return chevalRepository.findAll();
+    public ResponseEntity<List<Cheval>> recupererCheval() {
+        List<Cheval> chevaux = chevalRepository.findAll();
+        return ResponseEntity.ok(chevaux);
     }
 
+
+    @PostMapping("test")
+    public ResponseEntity<List<Cheval>> test() {
+        ajouterCheval();
+        List<Cheval> chevaux = chevalRepository.findAll();
+        return ResponseEntity.ok(chevaux);
+    }
 }

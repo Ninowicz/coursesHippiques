@@ -133,7 +133,7 @@ public class Course {
                 }
             }
             if (cheval.getCouleurDesYeux() == Cheval.CouleurDesYeux.Bleu &&
-                terrain.getMeteoCourse() == Terrain.meteo.grandSoleil){
+                terrain.getMeteoEvenement() == Terrain.meteo.grandSoleil){
                 malusCouleurYeuxTerrain = 0.5;
             }
 

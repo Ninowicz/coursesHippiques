@@ -26,7 +26,7 @@ public class Cheval {
     private double acceleration;
     private int nbCourseGagnees;
     private CouleurDeLaRobe couleurDeLaRobe;
-    private double pedigree;
+    private int pedigree;
     private CouleurDesYeux couleurDesYeux;
     private TypeDeFer typeDeFer;
     private int tempsRealise;
@@ -155,7 +155,7 @@ public class Cheval {
         this.acceleration = randomDouble(1.5, 2);
         this.nbCourseGagnees = randomInt(0, 62);
         this.couleurDeLaRobe = CouleurDeLaRobe.couleurDeLaRobeAleatoire();
-        this.pedigree = randomDouble(0, 1.2);
+        this.pedigree = randomInt(0, 2);
         this.couleurDesYeux = CouleurDesYeux.couleurAleatoire();
         this.typeDeFer = TypeDeFer.typeDeFerAleatoire();
         this.etatDuCheval = EtatDuCheval.EnForme;
@@ -227,11 +227,11 @@ public class Cheval {
         this.nbCourseGagnees = nbCourseGagnees;
     }
 
-    public double getPedigree() {
+    public int getPedigree() {
         return pedigree;
     }
 
-    public void setPedigree(double pedigree) {
+    public void setPedigree(int pedigree) {
         this.pedigree = pedigree;
     }
 

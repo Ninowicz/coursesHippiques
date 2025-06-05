@@ -69,8 +69,46 @@ public class Course {
     }
 
     // Methodes
-    public void calculerCote(){
+    public double coteAgeNbCoursesGagnees(double age, int nbCourseGagnees){
+        if (age < 2.6){
+            double a = (double) -50 /3;
+            double b = 2*a + 10;
+            return (a*age+b)/nbCourseGagnees;
+        }
+        else {
+            double a = (double) 10/7.4;
+            double b = -2*a ;
+            return (a*age+b)/nbCourseGagnees;
+        }
     }
+    public void calculerCote(){
+        double cote = 1;
+        double coteRace = 0;
+        double coteCoursesGagneesAge = 0;
+        double cotePedigree = 0;
+        double coteEtat = 0;
+
+        for (Cheval cheval : listeCheval){
+            switch (cheval.getRace()){
+                case PurSang -> coteRace = 0;
+                case AQPS -> coteRace = 2;
+                case TrotteurFrancais ->  coteRace=2;
+            }
+            switch (cheval.getEtatDuCheval()){
+                case Mort -> coteEtat = 1000;
+                case Fatigue -> coteEtat = 3;
+                case Blesse -> coteEtat = 10;
+            }
+            switch ((int) cheval.getPedigree()){
+                case 1 -> cotePedigree = 1;
+                case 0 -> cotePedigree = 5;
+            }
+            coteCoursesGagneesAge = coteAgeNbCoursesGagnees(cheval.getAge(), cheval.getNbCourseGagnees());
+            cote += coteRace + cotePedigree + coteCoursesGagneesAge + coteEtat;
+            cheval.setCote(cote);
+        }
+    }
+
     public void calculerMalus(){
         for (Cheval cheval : listeCheval){
             double a = 0.001;
@@ -108,6 +146,7 @@ public class Course {
             cheval.setMalus(malus);
         }
     }
+
     public List<Integer> calculerTempsRealise(){
         List<Integer> listeTemps = new ArrayList<>();
         for (Cheval cheval : listeCheval){

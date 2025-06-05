@@ -5,76 +5,183 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Random;
+
 
 @Entity
 public class Terrain {
 
-    public enum typTerrain{
+    public enum typeTerrain{
         herbe,
         sable,
         fibre
     }
+    public enum meteo {
+        normale,                    // aucun debuff
+        grandSoleil,                // debuff yeux bleu
+        pluie,                      // debuff acceleration pour tous les chevaux
+        orage                       // facteur aleatoire de ne pas finir la course
+    }
 
-
-    // Attributs
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private String meteo; // (enum ?)
-    private String typeTerrain; // (enum ?)
-    private int tauxDeBlessure;
-    private int longueur;
 
-    // type :
-    // type : Plat - Trot - Haies - Obstacles (peut etre en prendre que 3)
+
+
+    // Attributs
+
+        // invaraiable
+    private String nomTerrain;
+    private int longueur;
+    private typeTerrain typeDeTerrain;
+
+        // variable
+    private meteo meteoCourse;
+    private int tauxDeBlessures; // Valeur entre 0 et 100
+
 
     // Constructeurs
 
 
-    public Terrain() {}
+    // public Terrain() {}
 
-    public Terrain(String type, int tauxDeBlessure, int longueur) {
-        this.type = type;
-        this.tauxDeBlessure = tauxDeBlessure;
+
+    // Un terrain a son nom, sa longueur et son type de terrain,
+    // La météo et le taux de blessures seront parametrés plus tard.
+
+    public Terrain(String nomTerrain, int longueur, typeTerrain typeDeTerrain) {
+        this.nomTerrain = nomTerrain;
         this.longueur = longueur;
+        this.typeDeTerrain = typeDeTerrain;
     }
-
 
     // Methodes
 
+    public void setConditionsAleatoires(){
 
+        // Fonction qui permet de generer aléatoirement la météo ainsi que le taux de bléssures associé.
+
+        Random rand = new Random();
+        int n = rand.nextInt(4);
+        switch(n){
+            case 0:
+                this.setMeteoCourse(meteo.valueOf("normale"));
+                this.setTauxDeBlessuresSelonMeteo();
+                break;
+            case 1:
+                this.setMeteoCourse(meteo.valueOf("grandSoleil"));
+                this.setTauxDeBlessuresSelonMeteo();
+                break;
+            case 2:
+                this.setMeteoCourse(meteo.valueOf("pluie"));
+                this.setTauxDeBlessuresSelonMeteo();
+                break;
+            case 3:
+                this.setMeteoCourse(meteo.valueOf("orage"));
+                this.setTauxDeBlessuresSelonMeteo();
+                break;
+            default:
+                System.out.println("Erreur parametrage de la meteo de " + this.nomTerrain);
+        }
+    }
+
+    private void setTauxDeBlessuresSelonMeteo(){
+
+        if(this.meteoCourse == meteo.normale){
+            if(this.typeDeTerrain == typeTerrain.herbe){
+                this.setTauxDeBlessures(10);
+            }
+            else if(this.typeDeTerrain == typeTerrain.sable){
+                this.setTauxDeBlessures(15);
+            }
+            else if(this.typeDeTerrain == typeTerrain.fibre){
+                this.setTauxDeBlessures(5);
+            }
+            else{
+                this.setTauxDeBlessures(15);
+            }
+        }
+
+        if(this.meteoCourse == meteo.grandSoleil){
+            if(this.typeDeTerrain == typeTerrain.herbe){
+                this.setTauxDeBlessures(10);
+            }
+            else if(this.typeDeTerrain == typeTerrain.sable){
+                this.setTauxDeBlessures(10);
+            }
+            else if(this.typeDeTerrain == typeTerrain.fibre){
+                this.setTauxDeBlessures(5);
+            }
+            else{
+                this.setTauxDeBlessures(10);
+            }
+        }
+
+        if(this.meteoCourse == meteo.pluie){
+            if(this.typeDeTerrain == typeTerrain.herbe){
+                this.setTauxDeBlessures(25);
+            }
+            else if(this.typeDeTerrain == typeTerrain.sable){
+                this.setTauxDeBlessures(30);
+            }
+            else if(this.typeDeTerrain == typeTerrain.fibre){
+                this.setTauxDeBlessures(10);
+            }
+            else{
+                this.setTauxDeBlessures(15);
+            }
+        }
+
+        if(this.meteoCourse == meteo.orage){
+            if(this.typeDeTerrain == typeTerrain.herbe){
+                this.setTauxDeBlessures(40);
+            }
+            else if(this.typeDeTerrain == typeTerrain.sable){
+                this.setTauxDeBlessures(45);
+            }
+            else if(this.typeDeTerrain == typeTerrain.fibre){
+                this.setTauxDeBlessures(15);
+            }
+            else{
+                this.setTauxDeBlessures(40);
+            }
+        }
+
+    }
 
 
 
     // Getter Setter
 
-    public String getMeteo() {
-        return meteo;
+
+    public meteo getMeteoCourse() {
+        return meteoCourse;
     }
 
-    public String getType() {
-        return type;
+    public typeTerrain getTypeDeTerrain() {
+        return typeDeTerrain;
     }
 
-    public int getTauxDeBlessure() {
-        return tauxDeBlessure;
+    public int getTauxDeBlessures() {
+        return tauxDeBlessures;
     }
 
     public int getLongueur() {
         return longueur;
     }
 
-    public void setMeteo(String meteo) {
-        this.meteo = meteo;
+    public void setMeteoCourse(meteo meteoCourse) {
+        this.meteoCourse = meteoCourse;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeDeTerrain(typeTerrain typeDeTerrain) {
+        this.typeDeTerrain = typeDeTerrain;
     }
 
-    public void setTauxDeBlessure(int tauxDeBlessure) {
-        this.tauxDeBlessure = tauxDeBlessure;
+    public void setTauxDeBlessures(int tauxDeBlessures) {
+        this.tauxDeBlessures = tauxDeBlessures;
     }
 
     public void setLongueur(int longueur) {

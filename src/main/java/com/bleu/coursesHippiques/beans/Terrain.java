@@ -38,7 +38,7 @@ public class Terrain {
     private typeTerrain typeDeTerrain;
 
         // variable
-    private meteo meteoCourse; // (enum ?)
+    private meteo meteoCourse;
     private int tauxDeBlessures; // Valeur entre 0 et 100
 
 

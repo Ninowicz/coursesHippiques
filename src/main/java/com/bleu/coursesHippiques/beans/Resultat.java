@@ -12,8 +12,15 @@ public class Resultat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idResultat;
+
+    // A VOIR : Mettre un attribut Course directement ? a la place de la liste ?
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> classementListeCheval;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Pari pari;
+
+
     private boolean pariGagne;
     private double gainJoueur;
 
@@ -48,6 +55,10 @@ public class Resultat {
         return gainJoueur;
     }
 
+    public Pari getPari() {
+        return pari;
+    }
+
     public void setIdResultat(int idResultat) {
         this.idResultat = idResultat;
     }
@@ -62,5 +73,9 @@ public class Resultat {
 
     public void setGainJoueur(double gainJoueur) {
         this.gainJoueur = gainJoueur;
+    }
+
+    public void setPari(Pari pari) {
+        this.pari = pari;
     }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -29,10 +30,10 @@ public class Cheval {
     private int pedigree;
     private CouleurDesYeux couleurDesYeux;
     private TypeDeFer typeDeFer;
-    private int tempsRealise;
     private EtatDuCheval etatDuCheval;
     private double malus;
     private double cote;
+    private List<Integer> tempsRealise = new ArrayList<>();
 
 
     // Methodes
@@ -234,13 +235,24 @@ public class Cheval {
         this.pedigree = pedigree;
     }
 
+    public void setRace(Race race) {
+        this.race = race;
+    }
 
-    public int getTempsRealise() {
+    public void setCouleurDeLaRobe(CouleurDeLaRobe couleurDeLaRobe) {
+        this.couleurDeLaRobe = couleurDeLaRobe;
+    }
+
+    public List<Integer> getTempsRealise() {
         return tempsRealise;
     }
 
-    public void setTempsRealise(int tempsRealise) {
+    public void setTempsRealise(List<Integer> tempsRealise) {
         this.tempsRealise = tempsRealise;
+    }
+
+    public void setTypeDeFer(TypeDeFer typeDeFer) {
+        this.typeDeFer = typeDeFer;
     }
 
     public double getMalus() {

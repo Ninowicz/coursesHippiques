@@ -4,6 +4,14 @@ import java.util.*;
 
 @Entity
 public class Course {
+
+    public enum typeDeCourse{
+        plat,
+        trot,
+        obstacle
+    }
+
+
     // Attributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,10 +69,40 @@ public class Course {
     public void calculerCote(){
     }
     public void calculerMalus(){
+        for (Cheval cheval : listeCheval){
+            double a = 0.001;
+            double b = 1.2;
+            double malusBlessure = 0;
+            double malusCouleurYeuxTerrain = 0;
+            double malusFerTerrain = 0;
+            //* Premiere ligne malus en fonction de l'age, max age = 10 => malus max
+            //* Deuxieme ligne malus en fonction du ration Poids/Taille (fct affine ax + b)
+            //* Troisieme ligne malus globaux
+            double malus =  (Math.exp((double) cheval.getAge() /10)-Math.exp((double) 2 /10))/10 +
+                    Math.abs(a*cheval.getPoids() + b - cheval.getTaille())/10  +
+                    malusBlessure + malusCouleurYeuxTerrain  + malusFerTerrain;
+            cheval.setMalus(malus);
+        }
     }
-    public int calculerTempsRealse(){
+    public List<Integer> calculerTempsRealise(){
+        List<Integer> listeTemps = new ArrayList<>();
+        for (Cheval cheval : listeCheval){
+            List<Integer> listeDisanceParcourue = new ArrayList<>();
+            listeDisanceParcourue.add(0);
+            double rdAcceleration = Math.random();
+            double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
+            int i = 1;
+            while ( (terrain.getLongueur() > Collections.max(listeDisanceParcourue) ) ){
+                listeDisanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
+                        + Collections.max(listeDisanceParcourue) ));
+                i++;
+            }
+            listeTemps.add(listeDisanceParcourue.size());
+        }
+        return listeTemps;
     }
-    public int gainRealise(){
+    public int gainRealise(int mise){
+        return 0;
     }
     public void calculerBlessure(){
     }

@@ -15,10 +15,8 @@ public class CoursesHippiquesApplication {
 
 
 	}
-
 	// test tommy
 	// test Git
-
 	// test 2
 	// Test3
 }

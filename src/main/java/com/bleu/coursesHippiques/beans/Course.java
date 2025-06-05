@@ -63,8 +63,10 @@ public class Course {
     public void calculerMalus(){
     }
     public int calculerTempsRealse(){
+        return 0;
     }
     public int gainRealise(){
+        return 0;
     }
     public void calculerBlessure(){
     }

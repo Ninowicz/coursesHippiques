@@ -35,7 +35,7 @@ public class Terrain {
     private typeTerrain typeDeTerrain;
 
         // variable
-    private meteo meteoCourse;
+    private meteo meteoEvenement;
     private int tauxDeBlessures; // Valeur entre 0 et 100
 
 
@@ -63,19 +63,19 @@ public class Terrain {
         int n = rand.nextInt(4);
         switch(n){
             case 0:
-                this.setMeteoCourse(meteo.valueOf("normale"));
+                this.setMeteoEvenement(meteo.valueOf("normale"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             case 1:
-                this.setMeteoCourse(meteo.valueOf("grandSoleil"));
+                this.setMeteoEvenement(meteo.valueOf("grandSoleil"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             case 2:
-                this.setMeteoCourse(meteo.valueOf("pluie"));
+                this.setMeteoEvenement(meteo.valueOf("pluie"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             case 3:
-                this.setMeteoCourse(meteo.valueOf("orage"));
+                this.setMeteoEvenement(meteo.valueOf("orage"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             default:
@@ -85,7 +85,7 @@ public class Terrain {
 
     private void setTauxDeBlessuresSelonMeteo(){
 
-        if(this.meteoCourse == meteo.normale){
+        if(this.meteoEvenement == meteo.normale){
             if(this.typeDeTerrain == typeTerrain.herbe){
                 this.setTauxDeBlessures(10);
             }
@@ -100,7 +100,7 @@ public class Terrain {
             }
         }
 
-        if(this.meteoCourse == meteo.grandSoleil){
+        if(this.meteoEvenement == meteo.grandSoleil){
             if(this.typeDeTerrain == typeTerrain.herbe){
                 this.setTauxDeBlessures(10);
             }
@@ -115,7 +115,7 @@ public class Terrain {
             }
         }
 
-        if(this.meteoCourse == meteo.pluie){
+        if(this.meteoEvenement == meteo.pluie){
             if(this.typeDeTerrain == typeTerrain.herbe){
                 this.setTauxDeBlessures(25);
             }
@@ -130,7 +130,7 @@ public class Terrain {
             }
         }
 
-        if(this.meteoCourse == meteo.orage){
+        if(this.meteoEvenement == meteo.orage){
             if(this.typeDeTerrain == typeTerrain.herbe){
                 this.setTauxDeBlessures(40);
             }
@@ -160,8 +160,8 @@ public class Terrain {
         return nomTerrain;
     }
 
-    public meteo getMeteoCourse() {
-        return meteoCourse;
+    public meteo getMeteoEvenement() {
+        return meteoEvenement;
     }
 
     public typeTerrain getTypeDeTerrain() {
@@ -176,8 +176,8 @@ public class Terrain {
         return longueur;
     }
 
-    public void setMeteoCourse(meteo meteoCourse) {
-        this.meteoCourse = meteoCourse;
+    public void setMeteoEvenement(meteo meteoEvenement) {
+        this.meteoEvenement = meteoEvenement;
     }
 
     public void setTypeDeTerrain(typeTerrain typeDeTerrain) {

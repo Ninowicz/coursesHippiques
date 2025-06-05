@@ -62,10 +62,10 @@ public class Course {
     }
     public void calculerMalus(){
     }
-    public int calculerTempsRealse(){
+    public int calculerTempsRealise(){
         return 0;
     }
-    public int gainRealise(){
+    public int gainRealise(int mise){
         return 0;
     }
     public void calculerBlessure(){

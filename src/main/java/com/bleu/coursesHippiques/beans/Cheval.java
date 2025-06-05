@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Random;
+
 @Entity
 public class Cheval {
 
@@ -15,55 +17,105 @@ public class Cheval {
     private int idCheval;
     private String nom;
     private int age;
-    private String race;
-    private String taille;
+    private Race race;
+    private double taille;
     private int poids;
     private int vitesseMax;
-    private int acceleration;
+    private double acceleration;
     private int nbCourseGagnees;
-    private String couleurDeLaRobe;
-    private int pedigree;
-    private String couleurDesYeux;
+    private CouleurDeLaRobe couleurDeLaRobe;
+    private double pedigree;
+    private CouleurDesYeux couleurDesYeux;
+    private TypeDeFer typeDeFer;
     private int tempsRealise;
-    private String etatDuCheval;
+    private EtatDuCheval etatDuCheval;
     private int malus;
     private int cote;
 
 
+    // Methodes
 
-    // enums
+    private int randomInt(int min, int max) {
+        return (int) (Math.random() * (max - min + 1)) + min;
+    }
 
+    private double randomDouble(double min, double max) {
+        return (Math.random() * (max - min)) + min;
+    }
+
+
+    // Enums
+    public enum CouleurDesYeux {
+        Bleu, Marron;
+
+        private static final CouleurDesYeux[] VALEURS = values();
+        private static final Random RANDOM = new Random();
+
+        public static CouleurDesYeux couleurAleatoire() {
+            return VALEURS[RANDOM.nextInt(VALEURS.length)];
+        }
+    }
+
+    public enum Race {
+        PurSang, TrotteurFrancais, AQPS;
+
+        private static final Race[] VALEURS = values();
+        private static final Random RANDOM = new Random();
+
+        public static Race raceAleatoire() {
+            return VALEURS[RANDOM.nextInt(VALEURS.length)];
+        }
+    }
+
+    public enum CouleurDeLaRobe {
+        Noir, Bai, Alezan, Souris, Isabelle, Blanc;
+
+        private static final CouleurDeLaRobe[] VALEURS = values();
+        private static final Random RANDOM = new Random();
+
+        public static CouleurDeLaRobe couleurDeLaRobeAleatoire() {
+            return VALEURS[RANDOM.nextInt(VALEURS.length)];
+        }
+    }
+
+    public enum EtatDuCheval {
+        Blesse, Mort, EnForme, Fatigue;
+    }
+
+    public enum TypeDeFer {
+        Avec, Sans;
+
+        private static final TypeDeFer[] VALEURS = values();
+        private static final Random RANDOM = new Random();
+
+        public static TypeDeFer typeDeFerAleatoire() {
+            return VALEURS[RANDOM.nextInt(VALEURS.length)];
+        }
+    }
 
 
     // Constructeurs
 
-
-    public Cheval(String nom, int age, String race, String taille, int poids, int vitesseMax, int acceleration, int nbCourseGagnees, String couleurDeLaRobe, int pedigree, String couleurDesYeux) {
+    public Cheval(String nom) {
         this.nom = nom;
-        this.age = age;
-        this.race = race;
-        this.taille = taille;
-        this.poids = poids;
-        this.vitesseMax = vitesseMax;
-        this.acceleration = acceleration;
-        this.nbCourseGagnees = nbCourseGagnees;
-        this.couleurDeLaRobe = couleurDeLaRobe;
-        this.pedigree = pedigree;
-        this.couleurDesYeux = couleurDesYeux;
+        this.age = randomInt(2, 10);
+        this.race = Race.raceAleatoire();
+        this.taille = randomDouble(1.5, 1.8);
+        this.poids = randomInt(300, 800);
+        this.vitesseMax = randomInt(55, 60);
+        this.acceleration = randomDouble(1.5, 2);
+        this.nbCourseGagnees = randomInt(0, 62);
+        this.couleurDeLaRobe = CouleurDeLaRobe.couleurDeLaRobeAleatoire();
+        this.pedigree = randomDouble(0, 1.2);
+        this.couleurDesYeux = CouleurDesYeux.couleurAleatoire();
+        this.typeDeFer = TypeDeFer.typeDeFerAleatoire();
+        this.etatDuCheval = EtatDuCheval.EnForme;
     }
 
     public Cheval() {
     }
 
     // Getter Setters
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
 
     public int getIdCheval() {
         return idCheval;
@@ -89,11 +141,11 @@ public class Cheval {
         this.age = age;
     }
 
-    public String getTaille() {
+    public double getTaille() {
         return taille;
     }
 
-    public void setTaille(String taille) {
+    public void setTaille(double taille) {
         this.taille = taille;
     }
 
@@ -113,11 +165,11 @@ public class Cheval {
         this.vitesseMax = vitesseMax;
     }
 
-    public int getAcceleration() {
+    public double getAcceleration() {
         return acceleration;
     }
 
-    public void setAcceleration(int acceleration) {
+    public void setAcceleration(double acceleration) {
         this.acceleration = acceleration;
     }
 
@@ -129,29 +181,14 @@ public class Cheval {
         this.nbCourseGagnees = nbCourseGagnees;
     }
 
-    public String getCouleurDeLaRobe() {
-        return couleurDeLaRobe;
-    }
-
-    public void setCouleurDeLaRobe(String couleurDeLaRobe) {
-        this.couleurDeLaRobe = couleurDeLaRobe;
-    }
-
-    public int getPedigree() {
+    public double getPedigree() {
         return pedigree;
     }
 
-    public void setPedigree(int pedigree) {
+    public void setPedigree(double pedigree) {
         this.pedigree = pedigree;
     }
 
-    public String getCouleurDesYeux() {
-        return couleurDesYeux;
-    }
-
-    public void setCouleurDesYeux(String couleurDesYeux) {
-        this.couleurDesYeux = couleurDesYeux;
-    }
 
     public int getTempsRealise() {
         return tempsRealise;
@@ -159,14 +196,6 @@ public class Cheval {
 
     public void setTempsRealise(int tempsRealise) {
         this.tempsRealise = tempsRealise;
-    }
-
-    public String getEtatDuCheval() {
-        return etatDuCheval;
-    }
-
-    public void setEtatDuCheval(String etatDuCheval) {
-        this.etatDuCheval = etatDuCheval;
     }
 
     public int getMalus() {
@@ -183,5 +212,49 @@ public class Cheval {
 
     public void setCote(int cote) {
         this.cote = cote;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRaceAleatoire() {
+        this.race = Race.raceAleatoire();
+    }
+
+    public CouleurDeLaRobe getCouleurDeLaRobe() {
+        return couleurDeLaRobe;
+    }
+
+    public void setCouleurDeLaRobeAleatoire() {
+        this.couleurDeLaRobe = CouleurDeLaRobe.couleurDeLaRobeAleatoire();
+    }
+
+    public CouleurDesYeux getCouleurDesYeux() {
+        return couleurDesYeux;
+    }
+
+    public void setCouleurDesYeux(CouleurDesYeux couleurDesYeux) {
+        this.couleurDesYeux = couleurDesYeux;
+    }
+
+    public void setCouleurDesYeuxAleatoire() {
+        this.couleurDesYeux = CouleurDesYeux.couleurAleatoire();
+    }
+
+    public TypeDeFer getTypeDeFer() {
+        return typeDeFer;
+    }
+
+    public void setTypeDeFerAleatoire() {
+        this.typeDeFer = TypeDeFer.typeDeFerAleatoire();
+    }
+
+    public EtatDuCheval getEtatDuCheval() {
+        return etatDuCheval;
+    }
+
+    public void setEtatDuCheval(EtatDuCheval etatDuCheval) {
+        this.etatDuCheval = etatDuCheval;
     }
 }

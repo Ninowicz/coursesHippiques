@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import java.util.List;
 
 @Entity
-public class Resultats {
+public class Resultat {
 
     // Attributs
 
@@ -24,7 +24,7 @@ public class Resultats {
 
     // Constructeurs
 
-    public Resultats() {}
+    public Resultat() {}
 
 
 

@@ -29,8 +29,8 @@ public class Cheval {
     private TypeDeFer typeDeFer;
     private int tempsRealise;
     private EtatDuCheval etatDuCheval;
-    private int malus;
-    private int cote;
+    private double malus;
+    private double cote;
 
 
     // Methodes
@@ -198,19 +198,19 @@ public class Cheval {
         this.tempsRealise = tempsRealise;
     }
 
-    public int getMalus() {
+    public double getMalus() {
         return malus;
     }
 
-    public void setMalus(int malus) {
+    public void setMalus(double malus) {
         this.malus = malus;
     }
 
-    public int getCote() {
+    public double getCote() {
         return cote;
     }
 
-    public void setCote(int cote) {
+    public void setCote(double cote) {
         this.cote = cote;
     }
 

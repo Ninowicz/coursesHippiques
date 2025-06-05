@@ -23,16 +23,13 @@ public class Terrain {
         orage                       // facteur aleatoire de ne pas finir la course
     }
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
-
-
     // Attributs
 
         // invaraiable
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idTerrain;
+
     private String nomTerrain;
     private int longueur;
     private typeTerrain typeDeTerrain;
@@ -156,6 +153,10 @@ public class Terrain {
 
     // Getter Setter
 
+
+    public int getIdTerrain() {
+        return idTerrain;
+    }
 
     public String getNomTerrain() {
         return nomTerrain;

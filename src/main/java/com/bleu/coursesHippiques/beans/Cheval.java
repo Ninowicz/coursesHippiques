@@ -11,11 +11,11 @@ public class Cheval {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    //
     // Attributs
     private int idCheval;
     private String nom;
     private int age;
+    private String race;
     private String taille;
     private int poids;
     private int vitesseMax;
@@ -30,11 +30,18 @@ public class Cheval {
     private int cote;
 
 
+
+    // enums
+
+
+
     // Constructeurs
 
-    public Cheval(String nom, int age, String taille, int poids, int vitesseMax, int acceleration, int nbCourseGagnees, String couleurDeLaRobe, int pedigree, String couleurDesYeux) {
+
+    public Cheval(String nom, int age, String race, String taille, int poids, int vitesseMax, int acceleration, int nbCourseGagnees, String couleurDeLaRobe, int pedigree, String couleurDesYeux) {
         this.nom = nom;
         this.age = age;
+        this.race = race;
         this.taille = taille;
         this.poids = poids;
         this.vitesseMax = vitesseMax;
@@ -49,6 +56,14 @@ public class Cheval {
     }
 
     // Getter Setters
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
 
     public int getIdCheval() {
         return idCheval;

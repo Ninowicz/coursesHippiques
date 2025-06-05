@@ -11,6 +11,7 @@ public class Cheval {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    //
     // Attributs
     private int idCheval;
     private String nom;

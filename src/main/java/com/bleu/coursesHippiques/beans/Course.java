@@ -20,6 +20,7 @@ public class Course {
     private int nbTours;
     private int nbParticipants;
 
+    //Rajout OneToMany
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> listeCheval;
     private Terrain terrain;

@@ -9,10 +9,8 @@ public class CoursesHippiquesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CoursesHippiquesApplication.class, args);
 	}
-
 	// test tommy
 	// test Git
-
 	// test 2
 	// Test3
 }

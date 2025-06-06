@@ -56,7 +56,7 @@ public class ChevalController {
         test.calculerCote();
         List<Cheval> temps = test.calculerTempsRealise();
         test.calculerBlessure();
-        test.podium();
+        List<Integer> listInt = test.podium();
         for (Cheval cheval : temps){
             chevalRepository.save(cheval);
         }

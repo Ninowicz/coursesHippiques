@@ -58,7 +58,7 @@ public class ChevalController {
         return temps;
     }
 
-    @PostMapping("test")
+    @PostMapping("initBaseDeDonnee")
     public ResponseEntity<List<Cheval>> initBaseDeDonnee() {
 
         for (int i = 1; i<15; i++) {

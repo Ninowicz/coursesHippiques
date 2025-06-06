@@ -12,15 +12,15 @@ import java.util.Random;
 public class Terrain {
 
     public enum typeTerrain{
-        herbe,
-        sable,
-        fibre
+        HERBE,
+        SABLE,
+        FIBRE
     }
     public enum meteo {
-        normale,                    // aucun debuff
-        grandSoleil,                // debuff yeux bleu
-        pluie,                      // debuff acceleration pour tous les chevaux
-        orage                       // facteur aleatoire de ne pas finir la course
+        NORMALE,                    // aucun debuff
+        GRAND_SOLEIL,                // debuff yeux bleu
+        PLUIE,                      // debuff acceleration pour tous les chevaux
+        ORAGE                       // facteur aleatoire de ne pas finir la course
     }
 
     // Attributs
@@ -85,14 +85,14 @@ public class Terrain {
 
     private void setTauxDeBlessuresSelonMeteo(){
 
-        if(this.meteoEvenement == meteo.normale){
-            if(this.typeDeTerrain == typeTerrain.herbe){
+        if(this.meteoEvenement == meteo.NORMALE){
+            if(this.typeDeTerrain == typeTerrain.HERBE){
                 this.setTauxDeBlessures(10);
             }
-            else if(this.typeDeTerrain == typeTerrain.sable){
+            else if(this.typeDeTerrain == typeTerrain.SABLE){
                 this.setTauxDeBlessures(15);
             }
-            else if(this.typeDeTerrain == typeTerrain.fibre){
+            else if(this.typeDeTerrain == typeTerrain.FIBRE){
                 this.setTauxDeBlessures(5);
             }
             else{
@@ -100,14 +100,14 @@ public class Terrain {
             }
         }
 
-        if(this.meteoEvenement == meteo.grandSoleil){
-            if(this.typeDeTerrain == typeTerrain.herbe){
+        if(this.meteoEvenement == meteo.GRAND_SOLEIL){
+            if(this.typeDeTerrain == typeTerrain.HERBE){
                 this.setTauxDeBlessures(10);
             }
-            else if(this.typeDeTerrain == typeTerrain.sable){
+            else if(this.typeDeTerrain == typeTerrain.SABLE){
                 this.setTauxDeBlessures(10);
             }
-            else if(this.typeDeTerrain == typeTerrain.fibre){
+            else if(this.typeDeTerrain == typeTerrain.FIBRE){
                 this.setTauxDeBlessures(5);
             }
             else{
@@ -115,14 +115,14 @@ public class Terrain {
             }
         }
 
-        if(this.meteoEvenement == meteo.pluie){
-            if(this.typeDeTerrain == typeTerrain.herbe){
+        if(this.meteoEvenement == meteo.PLUIE){
+            if(this.typeDeTerrain == typeTerrain.HERBE){
                 this.setTauxDeBlessures(25);
             }
-            else if(this.typeDeTerrain == typeTerrain.sable){
+            else if(this.typeDeTerrain == typeTerrain.SABLE){
                 this.setTauxDeBlessures(30);
             }
-            else if(this.typeDeTerrain == typeTerrain.fibre){
+            else if(this.typeDeTerrain == typeTerrain.FIBRE){
                 this.setTauxDeBlessures(10);
             }
             else{
@@ -130,14 +130,14 @@ public class Terrain {
             }
         }
 
-        if(this.meteoEvenement == meteo.orage){
-            if(this.typeDeTerrain == typeTerrain.herbe){
+        if(this.meteoEvenement == meteo.ORAGE){
+            if(this.typeDeTerrain == typeTerrain.HERBE){
                 this.setTauxDeBlessures(40);
             }
-            else if(this.typeDeTerrain == typeTerrain.sable){
+            else if(this.typeDeTerrain == typeTerrain.SABLE){
                 this.setTauxDeBlessures(45);
             }
-            else if(this.typeDeTerrain == typeTerrain.fibre){
+            else if(this.typeDeTerrain == typeTerrain.FIBRE){
                 this.setTauxDeBlessures(15);
             }
             else{

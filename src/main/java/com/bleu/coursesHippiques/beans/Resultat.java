@@ -15,7 +15,7 @@ public class Resultat {
 
     // A VOIR : Mettre un attribut Course directement ? a la place de la liste ?
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Cheval> classementListeCheval;
+    private List<Integer> classementListeIdCheval;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Pari pari;
@@ -31,10 +31,34 @@ public class Resultat {
 
     public Resultat() {}
 
+    public Resultat(List<Integer> classementDeCourseId, Pari pariJoueur){
+        this.classementListeIdCheval = classementDeCourseId;
+        this.pari = pariJoueur;
+        this.gainJoueur = 0;
+        this.pariGagne = false;
+    }
 
 
 
     // Methodes
+
+    public void traitementGain(){
+        switch (this.pari.getTypePari()){
+            case SIMPLE:
+                traitementPariSimple();
+                break;
+            default:
+                System.out.println("ERREUR TYPE DE PARI dans classe Resultat méthodes traitementGain() ");
+        }
+    }
+
+    private void traitementPariSimple(){
+        if(this.pari.getChevalChoisi().getFirst().getIdCheval() == this.classementListeIdCheval.getFirst()){
+
+            //gain = mise * cote cheval choisi
+            this.gainJoueur = this.pari.getMise()*this.getPari().getChevalChoisi().getFirst().getCote();
+        }
+    }
 
     // Getter Setter
 
@@ -43,8 +67,8 @@ public class Resultat {
         return idResultat;
     }
 
-    public List<Cheval> getClassementListeCheval() {
-        return classementListeCheval;
+    public List<Integer> getClassementListeIdCheval() {
+        return classementListeIdCheval;
     }
 
     public boolean isPariGagne() {
@@ -63,8 +87,8 @@ public class Resultat {
         this.idResultat = idResultat;
     }
 
-    public void setClassementListeCheval(List<Cheval> classementListeCheval) {
-        this.classementListeCheval = classementListeCheval;
+    public void setClassementListeIdCheval(List<Integer> classementListeIdCheval) {
+        this.classementListeIdCheval = classementListeIdCheval;
     }
 
     public void setPariGagne(boolean pariGagne) {

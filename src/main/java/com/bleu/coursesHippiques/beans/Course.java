@@ -170,7 +170,21 @@ public class Course {
         }
     }
 
-    public void podium(int mise){
+    public List<Integer> podium(){
+        Comparator<Cheval> comparatorDistanceParcoures = (c1, c2) -> {
+            return Collections.max(c1.getTempsRealise()) -
+                    Collections.max(c2.getTempsRealise());
+        };
+        Comparator<Cheval> comparatorTaille = (c1, c2) -> {
+            return c1.getTempsRealise().size() - c2.getTempsRealise().size();
+        };
+        listeCheval.sort(comparatorDistanceParcoures);
+        listeCheval.sort(comparatorTaille);
+        List<Integer> listeID = new ArrayList<>();
+        for (Cheval c : listeCheval){
+            listeID.add((int) c.getIdCheval());
+        }
+        return listeID;
     }
 
 

@@ -13,19 +13,15 @@ public class Resultat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idResultat;
 
-    // A VOIR : Mettre un attribut Course directement ? a la place de la liste ?
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> classementListeCheval;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Pari pari;
 
-
     private boolean pariGagne;
     private double gainJoueur;
 
-    // Resultat a peut etre besoin d'une course dans ses attributs ?
-    // private Course course;
 
     // Constructeurs
 
@@ -39,25 +35,8 @@ public class Resultat {
     }
 
 
-
     // Methodes
 
-    public void traitementGain(){
-        switch (this.pari.getTypePari()){
-            case SIMPLE:
-                traitementPariSimple();
-                break;
-            default:
-                System.out.println("ERREUR TYPE DE PARI dans classe Resultat méthodes traitementGain() ");
-        }
-    }
-
-    private void traitementPariSimple(){
-        if(this.pari.getChevalChoisi().getFirst().getIdCheval() == this.classementListeCheval.getFirst().getIdCheval()){
-            //gain = mise * cote cheval choisi
-            this.gainJoueur = this.pari.getMise()*this.getPari().getChevalChoisi().getFirst().getCote();
-        }
-    }
 
     // Getter Setter
 

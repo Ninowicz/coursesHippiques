@@ -2,7 +2,6 @@ package com.bleu.coursesHippiques.beans;
 
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -17,10 +16,12 @@ public class Pari {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPari;
+
+    @Enumerated(EnumType.STRING)
     private TypeDePari typePari;
     private int mise;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Cheval> chevalChoisi;
 
     // Constructeurs

@@ -48,6 +48,7 @@ public class ChevalController {
 
         Terrain terrain = new Terrain();
         terrain.setLongueur(2400);
+        terrain.setConditionsAleatoires();
         Course test = new Course();
         test.setListeCheval(chevalRepository.findAll());
         test.setTerrain(terrain);

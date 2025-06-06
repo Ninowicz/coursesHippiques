@@ -56,10 +56,10 @@ public class ChevalController {
         test.calculerCote();
         List<Cheval> temps = test.calculerTempsRealise();
         test.calculerBlessure();
+        test.podium();
         for (Cheval cheval : temps){
             chevalRepository.save(cheval);
         }
-        System.out.println(temps);
 
         return temps;
     }

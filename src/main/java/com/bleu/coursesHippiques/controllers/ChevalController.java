@@ -54,12 +54,13 @@ public class ChevalController {
         test.setTerrain(terrain);
         test.calculerMalus();
         test.calculerCote();
-        List<Cheval> temps = test.calculerTempsRealise();
+        test.calculerTempsRealise();
+        List<Cheval> temps =  test.podium();
         test.calculerBlessure();
-        List<Integer> listInt = test.podium();
         for (Cheval cheval : temps){
             chevalRepository.save(cheval);
         }
+        System.out.println(temps);
 
         return temps;
     }

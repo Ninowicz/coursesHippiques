@@ -142,8 +142,7 @@ public class Course {
         }
     }
 
-    public List<Cheval> calculerTempsRealise(){
-        List<Cheval> listeTemps = new ArrayList<>();
+    public void calculerTempsRealise(){
         for (Cheval cheval : listeCheval){
             List<Integer> listeDistanceParcourue = new ArrayList<>();
             listeDistanceParcourue.add(0);
@@ -156,9 +155,7 @@ public class Course {
                 i++;
             }
             cheval.setTempsRealise(listeDistanceParcourue);
-            listeTemps.add(cheval);
         }
-        return listeTemps;
     }
 
     public void calculerBlessure(){
@@ -170,7 +167,7 @@ public class Course {
         }
     }
 
-    public List<Integer> podium(){
+    public List<Cheval> podium(){
         Comparator<Cheval> comparatorDistanceParcourues = (c1, c2) -> {
             return Collections.max(c1.getTempsRealise()) -
                     Collections.max(c2.getTempsRealise());
@@ -180,11 +177,8 @@ public class Course {
         };
         listeCheval.sort(comparatorDistanceParcourues);
         listeCheval.sort(comparatorTemps);
-        List<Integer> listeID = new ArrayList<>();
-        for (Cheval c : listeCheval){
-            listeID.add((int) c.getIdCheval());
-        }
-        return listeID;
+
+        return listeCheval;
     }
 
 

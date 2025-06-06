@@ -15,7 +15,7 @@ public class Resultat {
 
     // A VOIR : Mettre un attribut Course directement ? a la place de la liste ?
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Integer> classementListeIdCheval;
+    private List<Cheval> classementListeCheval;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Pari pari;
@@ -31,8 +31,8 @@ public class Resultat {
 
     public Resultat() {}
 
-    public Resultat(List<Integer> classementDeCourseId, Pari pariJoueur){
-        this.classementListeIdCheval = classementDeCourseId;
+    public Resultat(List<Cheval> classementDeCourseId, Pari pariJoueur){
+        this.classementListeCheval = classementDeCourseId;
         this.pari = pariJoueur;
         this.gainJoueur = 0;
         this.pariGagne = false;
@@ -53,8 +53,7 @@ public class Resultat {
     }
 
     private void traitementPariSimple(){
-        if(this.pari.getChevalChoisi().getFirst().getIdCheval() == this.classementListeIdCheval.getFirst()){
-
+        if(this.pari.getChevalChoisi().getFirst().getIdCheval() == this.classementListeCheval.getFirst().getIdCheval()){
             //gain = mise * cote cheval choisi
             this.gainJoueur = this.pari.getMise()*this.getPari().getChevalChoisi().getFirst().getCote();
         }
@@ -67,8 +66,8 @@ public class Resultat {
         return idResultat;
     }
 
-    public List<Integer> getClassementListeIdCheval() {
-        return classementListeIdCheval;
+    public List<Cheval> getClassementListeCheval() {
+        return classementListeCheval;
     }
 
     public boolean isPariGagne() {
@@ -87,8 +86,8 @@ public class Resultat {
         this.idResultat = idResultat;
     }
 
-    public void setClassementListeIdCheval(List<Integer> classementListeIdCheval) {
-        this.classementListeIdCheval = classementListeIdCheval;
+    public void setClassementListeCheval(List<Cheval> classementListeCheval) {
+        this.classementListeCheval = classementListeCheval;
     }
 
     public void setPariGagne(boolean pariGagne) {

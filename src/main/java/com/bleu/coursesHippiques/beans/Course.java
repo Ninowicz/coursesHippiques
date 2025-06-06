@@ -124,18 +124,18 @@ public class Course {
                 case Mort -> malusBlessure = 100;
             }
             if (cheval.getTypeDeFer() == Cheval.TypeDeFer.Avec){
-                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.fibre ||
-                        terrain.getTypeDeTerrain() == Terrain.typeTerrain.sable ){
+                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE ||
+                        terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE ){
                     malusFerTerrain = 0.05;
                 }
             }
             else {
-                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.herbe){
+                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.HERBE){
                     malusFerTerrain = 0.05;
                 }
             }
             if (cheval.getCouleurDesYeux() == Cheval.CouleurDesYeux.Bleu &&
-                terrain.getMeteoEvenement() == Terrain.meteo.grandSoleil){
+                terrain.getMeteoEvenement() == Terrain.meteo.GRAND_SOLEIL){
                 malusCouleurYeuxTerrain = 0.5;
             }
 

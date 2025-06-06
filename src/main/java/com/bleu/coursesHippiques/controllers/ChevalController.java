@@ -58,4 +58,19 @@ public class ChevalController {
         return temps;
     }
 
+    @PostMapping("test")
+    public ResponseEntity<List<Cheval>> initBaseDeDonnee() {
+
+        for (int i = 1; i<15; i++) {
+            ajouterCheval();
+        }
+        for (int j = 1; j < 5; j++) {
+
+
+        }
+
+        List<Cheval> chevaux = chevalRepository.findAll();
+        return ResponseEntity.ok(chevaux);
+    }
+
 }

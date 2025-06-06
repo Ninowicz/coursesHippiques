@@ -149,10 +149,9 @@ public class Course {
         }
     }
 
-    public List<Integer> calculerTempsRealise(){
-        List<Integer> listeTemps = new ArrayList<>();
+    public List<Cheval> calculerTempsRealise(){
+        List<Cheval> listeTemps = new ArrayList<>();
         for (Cheval cheval : listeCheval){
-            int tempID = Math.toIntExact(cheval.getIdCheval());
             List<Integer> listeDistanceParcourue = new ArrayList<>();
             listeDistanceParcourue.add(0);
             double rdAcceleration = (Math.random() * 0.2) ;
@@ -164,7 +163,7 @@ public class Course {
                 i++;
             }
             cheval.setTempsRealise(listeDistanceParcourue);
-            listeTemps.add(listeDistanceParcourue.size());
+            listeTemps.add(cheval);
         }
         return listeTemps;
     }

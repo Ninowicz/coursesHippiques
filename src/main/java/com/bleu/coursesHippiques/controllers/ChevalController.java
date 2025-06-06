@@ -45,7 +45,7 @@ public class ChevalController {
     }
 
     @GetMapping("testtime")
-    public List<Integer> testtime() {
+    public List<Cheval> testtime() {
 
         Terrain terrain = new Terrain();
         terrain.setLongueur(2400);
@@ -53,7 +53,10 @@ public class ChevalController {
         test.setListeCheval(chevalRepository.findAll());
         test.setTerrain(terrain);
         test.calculerMalus();
-        List<Integer> temps = test.calculerTempsRealise();
+        List<Cheval> temps = test.calculerTempsRealise();
+        for (Cheval cheval : temps){
+            chevalRepository.save(cheval);
+        }
         System.out.println(temps);
 
         return temps;

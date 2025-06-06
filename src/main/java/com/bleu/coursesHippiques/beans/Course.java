@@ -21,10 +21,10 @@ public class Course {
     private int nbParticipants;
 
     //Rajout OneToMany
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> listeCheval;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Terrain terrain;
 
     // Getters & Setters

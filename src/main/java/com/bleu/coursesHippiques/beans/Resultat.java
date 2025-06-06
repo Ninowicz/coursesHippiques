@@ -17,7 +17,7 @@ public class Resultat {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> classementListeCheval;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Pari pari;
 
 

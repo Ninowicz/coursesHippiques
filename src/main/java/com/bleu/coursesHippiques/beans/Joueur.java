@@ -1,9 +1,6 @@
 package com.bleu.coursesHippiques.beans;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Joueur {
@@ -15,8 +12,9 @@ public class Joueur {
     private int idJoueur;
     private String username;
     private String password;
-
     private double argent;
+    @OneToOne
+    private Pari pari;
 
 
     // Constructeurs
@@ -26,8 +24,10 @@ public class Joueur {
         this.password = password;
     }
 
+    public Joueur() {
+    }
 
-    // Methodes
+// Methodes
 
     // Getter Setter
 
@@ -52,7 +52,23 @@ public class Joueur {
         this.password = password;
     }
 
-    public void setArgent(int argent) {
+    public int getIdJoueur() {
+        return idJoueur;
+    }
+
+    public void setIdJoueur(int idJoueur) {
+        this.idJoueur = idJoueur;
+    }
+
+    public void setArgent(double argent) {
         this.argent = argent;
+    }
+
+    public Pari getPari() {
+        return pari;
+    }
+
+    public void setPari(Pari pari) {
+        this.pari = pari;
     }
 }

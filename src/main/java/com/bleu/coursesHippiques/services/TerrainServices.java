@@ -4,6 +4,7 @@ import com.bleu.coursesHippiques.beans.Terrain;
 import com.bleu.coursesHippiques.repositories.TerrainRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,12 +32,12 @@ public class TerrainServices {
         Terrain t5 = new Terrain("Desert Rouge", 1600, Terrain.typeTerrain.SABLE);
         t4.setConditionsAleatoires();
 
-        initTerrains().add(t1);
-        initTerrains().add(t2);
-        initTerrains().add(t3);
-        initTerrains().add(t4);
-        initTerrains().add(t5);
-
-        return terrainRepository.saveAll(initTerrains());
+        List<Terrain> listeTerrains = new ArrayList<>();
+        listeTerrains.add(t1);
+        listeTerrains.add(t2);
+        listeTerrains.add(t3);
+        listeTerrains.add(t4);
+        listeTerrains.add(t5);
+        return terrainRepository.saveAll(listeTerrains);
     }
 }

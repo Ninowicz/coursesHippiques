@@ -47,6 +47,7 @@ public class TerrainController {
         terrains.add(t2);
         terrains.add(t3);
         terrains.add(t4);
+        terrains.add(t5);
 
         terrainRepository.saveAll(terrains);
 

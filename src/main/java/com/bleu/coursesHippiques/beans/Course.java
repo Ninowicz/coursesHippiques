@@ -161,9 +161,17 @@ public class Course {
         return listeTemps;
     }
 
+    public void calculerBlessure(){
+        for (Cheval cheval : listeCheval){
+            int rd = (int) (Math.random() * 100);
+            if (rd <= terrain.getTauxDeBlessures()){
+                cheval.setEtatDuCheval(Cheval.EtatDuCheval.Blesse);
+            }
+        }
+    }
+
     public void podium(int mise){
     }
-    public void calculerBlessure(){
-    }
+
 
 }

@@ -47,11 +47,11 @@ public class ChevalController {
     public List<Integer> testtime() {
 
         Terrain terrain = new Terrain();
-        terrain.setLongueur(1000);
+        terrain.setLongueur(2400);
         Course test = new Course();
         test.setListeCheval(chevalRepository.findAll());
         test.setTerrain(terrain);
-
+        test.calculerMalus();
         List<Integer> temps = test.calculerTempsRealise();
         System.out.println(temps);
 

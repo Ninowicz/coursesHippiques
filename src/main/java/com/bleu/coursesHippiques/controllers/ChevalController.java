@@ -1,10 +1,10 @@
 package com.bleu.coursesHippiques.controllers;
 
-
 import com.bleu.coursesHippiques.beans.Cheval;
 import com.bleu.coursesHippiques.beans.Course;
 import com.bleu.coursesHippiques.beans.Terrain;
 import com.bleu.coursesHippiques.repositories.ChevalRepository;
+import com.bleu.coursesHippiques.services.ChevalServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +15,18 @@ import java.util.List;
 public class ChevalController {
 
     private final ChevalRepository chevalRepository;
+    private final ChevalServices chevalServices;
 
-    public ChevalController(ChevalRepository chevalRepository) {
+    public ChevalController(ChevalRepository chevalRepository, ChevalServices chevalServices) {
         this.chevalRepository = chevalRepository;
 
+        this.chevalServices = chevalServices;
     }
+
 
     @PostMapping("ajouterCheval")
     public ResponseEntity<Cheval> ajouterCheval() {
-        Cheval cheval = new Cheval();
-        chevalRepository.save(cheval);
-        System.out.println(cheval.getNom() + " a ete ajoute. ID : " + cheval.getIdCheval());
+        Cheval cheval = chevalServices.ajouterCheval();
         return ResponseEntity.ok(cheval);
     }
 
@@ -56,21 +57,6 @@ public class ChevalController {
         System.out.println(temps);
 
         return temps;
-    }
-
-    @PostMapping("initBaseDeDonnee")
-    public ResponseEntity<List<Cheval>> initBaseDeDonnee() {
-
-        for (int i = 1; i<15; i++) {
-            ajouterCheval();
-        }
-        for (int j = 1; j < 5; j++) {
-
-
-        }
-
-        List<Cheval> chevaux = chevalRepository.findAll();
-        return ResponseEntity.ok(chevaux);
     }
 
 }

@@ -5,22 +5,21 @@ import java.util.*;
 @Entity
 public class Course {
 
-    public enum typeDeCourse{
-        plat,
-        trot,
-        obstacle
+    public enum typeCourse{
+        PLAT,
+        TROT,
+        OBSTACLE
     }
-
 
     // Attributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
-    private String typeDeCourse;
+    private String nomCourse;
+    private typeCourse typeDeCourse;
     private int nbTours;
     private int nbParticipants;
 
-    //Rajout OneToMany
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cheval> listeCheval;
 
@@ -28,10 +27,16 @@ public class Course {
     private Terrain terrain;
 
     // Getters & Setters
-    public String getTypeDeCourse() {
+    public String getNomCourse() {
+        return nomCourse;
+    }
+    public void setNomCourse(String nomCourse) {
+        this.nomCourse = nomCourse;
+    }
+    public typeCourse getTypeDeCourse() {
         return typeDeCourse;
     }
-    public void setTypeDeCourse(String typeDeCourse) {
+    public void setTypeDeCourse(typeCourse typeDeCourse) {
         this.typeDeCourse = typeDeCourse;
     }
     public int getNbTours() {
@@ -58,19 +63,46 @@ public class Course {
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
     }
+    public int getID() {
+        return ID;
+    }
 
     // Constructeurs
     public Course() {
     }
-    public Course(String typeDeCourse, int nbTours, int nbParticipants, List<Cheval> listeCheval, Terrain terrain) {
+
+    public Course(String nomCourse, List<Cheval> listeCheval, Terrain terrain) {
+        this.nomCourse = nomCourse;
+        this.listeCheval = listeCheval;
+        this.terrain = terrain;
+        this.nbParticipants = listeCheval.size();
+        this.nbTours = 1;
+        this.typeDeCourse = typeCourse.PLAT;
+    }
+
+    public Course(String nomCourse, typeCourse typeDeCourse, int nbTours,List<Cheval> listeCheval, Terrain terrain) {
+        this.nomCourse = nomCourse;
         this.typeDeCourse = typeDeCourse;
         this.nbTours = nbTours;
-        this.nbParticipants = nbParticipants;
+        this.nbParticipants = listeCheval.size();
         this.listeCheval = listeCheval;
         this.terrain = terrain;
     }
 
     // Methodes
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "ID=" + ID +
+                ", typeDeCourse='" + typeDeCourse + '\'' +
+                ", nbTours=" + nbTours +
+                ", nbParticipants=" + nbParticipants +
+                ", listeCheval=" + listeCheval +
+                ", terrain=" + terrain +
+                '}';
+    }
+
     public double coteAgeNbCoursesGagnees(double age, int nbCourseGagnees){
         return age/((double) nbCourseGagnees /2+age)*5;
     }
@@ -103,7 +135,6 @@ public class Course {
             cheval.setCote(cote);
         }
     }
-
     public void calculerMalus(){
         for (Cheval cheval : listeCheval){
             double a = 0.001;
@@ -141,7 +172,6 @@ public class Course {
             cheval.setMalus(malus);
         }
     }
-
     public void calculerTempsRealise(){
         for (Cheval cheval : listeCheval){
             List<Integer> listeDistanceParcourue = new ArrayList<>();
@@ -157,7 +187,6 @@ public class Course {
             cheval.setTempsRealise(listeDistanceParcourue);
         }
     }
-
     public void calculerBlessure(){
         for (Cheval cheval : listeCheval){
             int rd = (int) (Math.random() * 100);
@@ -166,7 +195,6 @@ public class Course {
             }
         }
     }
-
     public List<Cheval> podium(){
         Comparator<Cheval> comparatorDistanceParcourues = (c1, c2) -> {
             return Collections.max(c1.getTempsRealise()) -

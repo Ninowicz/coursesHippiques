@@ -4,7 +4,9 @@ import com.bleu.coursesHippiques.beans.Cheval;
 import com.bleu.coursesHippiques.beans.Course;
 import com.bleu.coursesHippiques.beans.Terrain;
 import com.bleu.coursesHippiques.repositories.ChevalRepository;
+import com.bleu.coursesHippiques.repositories.CourseRepository;
 import com.bleu.coursesHippiques.services.ChevalServices;
+import com.bleu.coursesHippiques.services.CourseServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +18,14 @@ public class ChevalController {
 
     private final ChevalRepository chevalRepository;
     private final ChevalServices chevalServices;
+    private final CourseRepository courseRepository;
+    private final CourseServices courseServices;
 
-    public ChevalController(ChevalRepository chevalRepository, ChevalServices chevalServices) {
+    public ChevalController(ChevalRepository chevalRepository, ChevalServices chevalServices, CourseRepository courseRepository, CourseServices courseServices) {
         this.chevalRepository = chevalRepository;
-
         this.chevalServices = chevalServices;
+        this.courseRepository = courseRepository;
+        this.courseServices = courseServices;
     }
 
 
@@ -43,26 +48,6 @@ public class ChevalController {
 //        return ResponseEntity.ok(chevaux);
 //    }
 
-    @GetMapping("testtime")
-    public List<Cheval> testtime() {
 
-        Terrain terrain = new Terrain();
-        terrain.setLongueur(2400);
-        terrain.setConditionsAleatoires();
-        Course test = new Course();
-        test.setListeCheval(chevalRepository.findAll());
-        test.setTerrain(terrain);
-        test.calculerMalus();
-        test.calculerCote();
-        test.calculerTempsRealise();
-        List<Cheval> temps =  test.podium();
-        test.calculerBlessure();
-        for (Cheval cheval : temps){
-            chevalRepository.save(cheval);
-        }
-        System.out.println(temps);
-
-        return temps;
-    }
 
 }

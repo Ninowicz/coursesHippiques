@@ -52,6 +52,7 @@ public class ChevalController {
         test.setListeCheval(chevalRepository.findAll());
         test.setTerrain(terrain);
         test.calculerMalus();
+        test.calculerCote();
         List<Cheval> temps = test.calculerTempsRealise();
         for (Cheval cheval : temps){
             chevalRepository.save(cheval);

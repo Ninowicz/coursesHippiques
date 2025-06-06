@@ -75,12 +75,12 @@ public class Course {
         if (age < 2.6){
             double a = (double) -50 /3;
             double b = 2*a + 10;
-            return (a*age+b)/nbCourseGagnees;
+            return (a*age+b)/(nbCourseGagnees +1);
         }
         else {
             double a = (double) 10/7.4;
             double b = -2*a ;
-            return (a*age+b)/nbCourseGagnees;
+            return (a*age+b)/(nbCourseGagnees +1);
         }
     }
     public void calculerCote(){
@@ -99,14 +99,14 @@ public class Course {
             switch (cheval.getEtatDuCheval()){
                 case Mort -> coteEtat = 1000;
                 case Fatigue -> coteEtat = 3;
-                case Blesse -> coteEtat = 10;
+                case Blesse -> coteEtat = 5;
             }
             switch (cheval.getPedigree()){
                 case 1 -> cotePedigree = 1;
-                case 0 -> cotePedigree = 5;
+                case 0 -> cotePedigree = 2;
             }
             coteCoursesGagneesAge = coteAgeNbCoursesGagnees(cheval.getAge(), cheval.getNbCourseGagnees());
-            cote += coteRace + cotePedigree + coteCoursesGagneesAge + coteEtat;
+            cote = cote + coteRace + cotePedigree  + coteEtat;
             cheval.setCote(cote);
         }
     }

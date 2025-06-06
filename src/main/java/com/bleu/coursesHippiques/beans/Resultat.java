@@ -67,8 +67,8 @@ public class Resultat {
         return idResultat;
     }
 
-    public List<Cheval> getClassementListeCheval() {
-        return classementListeCheval;
+    public List<Integer> getClassementListeIdCheval() {
+        return classementListeIdCheval;
     }
 
     public boolean isPariGagne() {
@@ -87,8 +87,8 @@ public class Resultat {
         this.idResultat = idResultat;
     }
 
-    public void setClassementListeCheval(List<Cheval> classementListeCheval) {
-        this.classementListeCheval = classementListeCheval;
+    public void setClassementListeIdCheval(List<Integer> classementListeIdCheval) {
+        this.classementListeIdCheval = classementListeIdCheval;
     }
 
     public void setPariGagne(boolean pariGagne) {

@@ -152,18 +152,19 @@ public class Course {
     public List<Integer> calculerTempsRealise(){
         List<Integer> listeTemps = new ArrayList<>();
         for (Cheval cheval : listeCheval){
-            List<Integer> listeDisanceParcourue = new ArrayList<>();
-            listeDisanceParcourue.add(0);
+            int tempID = Math.toIntExact(cheval.getIdCheval());
+            List<Integer> listeDistanceParcourue = new ArrayList<>();
+            listeDistanceParcourue.add(0);
             double rdAcceleration = (Math.random() * 0.2) ;
             double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
             int i = 1;
-            while ( (terrain.getLongueur() > Collections.max(listeDisanceParcourue) ) ){
-                listeDisanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
-                        + Collections.max(listeDisanceParcourue) ));
+            while ( (terrain.getLongueur() > Collections.max(listeDistanceParcourue) ) ){
+                listeDistanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
+                        + Collections.max(listeDistanceParcourue) ));
                 i++;
             }
-            cheval.setTempsRealise(listeDisanceParcourue);
-            listeTemps.add(listeDisanceParcourue.size());
+            cheval.setTempsRealise(listeDistanceParcourue);
+            listeTemps.add(listeDistanceParcourue.size());
         }
         return listeTemps;
     }

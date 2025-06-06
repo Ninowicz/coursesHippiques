@@ -32,17 +32,16 @@ public class ChevalController {
 
     @GetMapping("recupererCheval")
     public ResponseEntity<List<Cheval>> recupererCheval() {
-        List<Cheval> chevaux = chevalRepository.findAll();
+        List<Cheval> chevaux = chevalServices.recupererCheval();
         return ResponseEntity.ok(chevaux);
     }
 
-
-    @PostMapping("test")
-    public ResponseEntity<List<Cheval>> test() {
-        ajouterCheval();
-        List<Cheval> chevaux = chevalRepository.findAll();
-        return ResponseEntity.ok(chevaux);
-    }
+//    @PostMapping("test")
+//    public ResponseEntity<List<Cheval>> test() {
+//        ajouterCheval();
+//        List<Cheval> chevaux = chevalRepository.findAll();
+//        return ResponseEntity.ok(chevaux);
+//    }
 
     @GetMapping("testtime")
     public List<Cheval> testtime() {

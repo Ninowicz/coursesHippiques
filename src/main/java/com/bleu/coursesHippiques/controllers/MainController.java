@@ -31,7 +31,7 @@ public class MainController {
     @PostMapping("initBaseDeDonnee")
     public ResponseEntity<List<Cheval>> initBaseDeDonnee() {
 
-        for (int i = 1; i<15; i++) {
+        for (int i = 0; i<15; i++) {
             chevalServices.ajouterCheval();
         }
 //        for (int j = 1; j < 5; j++) {

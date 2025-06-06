@@ -16,12 +16,7 @@ public class CoursesHippiquesApplication {
 		System.out.println("programme lancé");
 		// d
 
-		Terrain terrain = new Terrain();
-		terrain.setLongueur(1000);
-		Course test = new Course();
-		test.setTerrain(terrain);
 
-		System.out.println(test.calculerTempsRealise());
 	}
 	// test tommy
 	// test Git

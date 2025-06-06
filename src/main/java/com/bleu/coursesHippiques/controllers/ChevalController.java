@@ -18,14 +18,10 @@ public class ChevalController {
 
     private final ChevalRepository chevalRepository;
     private final ChevalServices chevalServices;
-    private final CourseRepository courseRepository;
-    private final CourseServices courseServices;
 
     public ChevalController(ChevalRepository chevalRepository, ChevalServices chevalServices, CourseRepository courseRepository, CourseServices courseServices) {
         this.chevalRepository = chevalRepository;
         this.chevalServices = chevalServices;
-        this.courseRepository = courseRepository;
-        this.courseServices = courseServices;
     }
 
 

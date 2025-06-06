@@ -101,7 +101,7 @@ public class Course {
                 case Fatigue -> coteEtat = 3;
                 case Blesse -> coteEtat = 10;
             }
-            switch ((int) cheval.getPedigree()){
+            switch (cheval.getPedigree()){
                 case 1 -> cotePedigree = 1;
                 case 0 -> cotePedigree = 5;
             }
@@ -154,7 +154,7 @@ public class Course {
         for (Cheval cheval : listeCheval){
             List<Integer> listeDisanceParcourue = new ArrayList<>();
             listeDisanceParcourue.add(0);
-            double rdAcceleration = Math.random();
+            double rdAcceleration = (Math.random() * 0.2) ;
             double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
             int i = 1;
             while ( (terrain.getLongueur() > Collections.max(listeDisanceParcourue) ) ){
@@ -162,12 +162,13 @@ public class Course {
                         + Collections.max(listeDisanceParcourue) ));
                 i++;
             }
+            cheval.setTempsRealise(listeDisanceParcourue);
             listeTemps.add(listeDisanceParcourue.size());
         }
         return listeTemps;
     }
-    public int gainRealise(int mise){
-        return 0;
+
+    public void podium(int mise){
     }
     public void calculerBlessure(){
     }

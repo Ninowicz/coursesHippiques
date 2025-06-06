@@ -153,7 +153,7 @@ public class Cheval {
         this.poids = randomInt(300, 800);
         this.vitesseMax = randomInt(55, 60);
         this.acceleration = randomDouble(1.5, 2);
-        this.nbCourseGagnees = randomInt(0, 62);
+        this.nbCourseGagnees = 0; //randomInt(0, 62)
         this.couleurDeLaRobe = CouleurDeLaRobe.couleurDeLaRobeAleatoire();
         this.pedigree = randomInt(0, 2);
         this.couleurDesYeux = CouleurDesYeux.couleurAleatoire();

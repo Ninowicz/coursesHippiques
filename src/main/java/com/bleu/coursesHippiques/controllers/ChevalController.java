@@ -47,15 +47,30 @@ public class ChevalController {
     public List<Integer> testtime() {
 
         Terrain terrain = new Terrain();
-        terrain.setLongueur(1000);
+        terrain.setLongueur(2400);
         Course test = new Course();
         test.setListeCheval(chevalRepository.findAll());
         test.setTerrain(terrain);
-
+        test.calculerMalus();
         List<Integer> temps = test.calculerTempsRealise();
         System.out.println(temps);
 
         return temps;
+    }
+
+    @PostMapping("test")
+    public ResponseEntity<List<Cheval>> initBaseDeDonnee() {
+
+        for (int i = 1; i<15; i++) {
+            ajouterCheval();
+        }
+        for (int j = 1; j < 5; j++) {
+
+
+        }
+
+        List<Cheval> chevaux = chevalRepository.findAll();
+        return ResponseEntity.ok(chevaux);
     }
 
 }

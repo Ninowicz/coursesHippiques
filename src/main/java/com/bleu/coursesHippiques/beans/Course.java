@@ -72,19 +72,10 @@ public class Course {
 
     // Methodes
     public double coteAgeNbCoursesGagnees(double age, int nbCourseGagnees){
-        if (age < 2.6){
-            double a = (double) -50 /3;
-            double b = 2*a + 10;
-            return (a*age+b)/(nbCourseGagnees +1);
-        }
-        else {
-            double a = (double) 10/7.4;
-            double b = -2*a ;
-            return (a*age+b)/(nbCourseGagnees +1);
-        }
+        return age/((double) nbCourseGagnees /2+age)*5;
     }
     public void calculerCote(){
-        double cote = 1;
+        double cote = 0;
         double coteRace = 0;
         double coteCoursesGagneesAge = 0;
         double cotePedigree = 0;
@@ -94,19 +85,21 @@ public class Course {
             switch (cheval.getRace()){
                 case PurSang -> coteRace = 0;
                 case AQPS -> coteRace = 2;
-                case TrotteurFrancais ->  coteRace=2;
+                case TrotteurFrancais ->  coteRace = 2;
             }
             switch (cheval.getEtatDuCheval()){
                 case Mort -> coteEtat = 1000;
                 case Fatigue -> coteEtat = 3;
                 case Blesse -> coteEtat = 5;
+                case EnForme -> coteEtat = 0;
             }
             switch (cheval.getPedigree()){
+                case 2 -> cotePedigree = 0;
                 case 1 -> cotePedigree = 1;
                 case 0 -> cotePedigree = 2;
             }
             coteCoursesGagneesAge = coteAgeNbCoursesGagnees(cheval.getAge(), cheval.getNbCourseGagnees());
-            cote = cote + coteRace + cotePedigree  + coteEtat;
+            cote = 1 + coteRace + cotePedigree +coteCoursesGagneesAge + coteEtat;
             cheval.setCote(cote);
         }
     }

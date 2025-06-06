@@ -43,25 +43,4 @@ public class ChevalController {
 //        return ResponseEntity.ok(chevaux);
 //    }
 
-    @GetMapping("testtime")
-    public List<Cheval> testtime() {
-
-        Terrain terrain = new Terrain();
-        terrain.setLongueur(2400);
-        terrain.setConditionsAleatoires();
-        Course test = new Course();
-        test.setListeCheval(chevalRepository.findAll());
-        test.setTerrain(terrain);
-        test.calculerMalus();
-        test.calculerCote();
-        List<Cheval> temps = test.calculerTempsRealise();
-        test.calculerBlessure();
-        List<Integer> listInt = test.podium();
-        for (Cheval cheval : temps){
-            chevalRepository.save(cheval);
-        }
-
-        return temps;
-    }
-
 }

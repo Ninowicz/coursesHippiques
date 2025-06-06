@@ -1,9 +1,7 @@
 package com.bleu.coursesHippiques.beans;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 
 import java.util.Random;
 
@@ -32,9 +30,12 @@ public class Terrain {
 
     private String nomTerrain;
     private int longueur;
+
+    @Enumerated(EnumType.STRING)
     private typeTerrain typeDeTerrain;
 
         // variable
+    @Enumerated(EnumType.STRING)
     private meteo meteoEvenement;
     private int tauxDeBlessures; // Valeur entre 0 et 100
 
@@ -55,101 +56,9 @@ public class Terrain {
 
     // Methodes
 
-    public void setConditionsAleatoires(){
-
-        // Fonction qui permet de generer aléatoirement la météo ainsi que le taux de bléssures associé.
-
-        Random rand = new Random();
-        int n = rand.nextInt(4);
-        switch(n){
-            case 0:
-                this.setMeteoEvenement(meteo.valueOf("NORMALE"));
-                this.setTauxDeBlessuresSelonMeteo();
-                break;
-            case 1:
-                this.setMeteoEvenement(meteo.valueOf("GRAND_SOLEIL"));
-                this.setTauxDeBlessuresSelonMeteo();
-                break;
-            case 2:
-                this.setMeteoEvenement(meteo.valueOf("PLUIE"));
-                this.setTauxDeBlessuresSelonMeteo();
-                break;
-            case 3:
-                this.setMeteoEvenement(meteo.valueOf("ORAGE"));
-                this.setTauxDeBlessuresSelonMeteo();
-                break;
-            default:
-                System.out.println("Erreur parametrage de la meteo de " + this.nomTerrain);
-        }
-    }
-
-    private void setTauxDeBlessuresSelonMeteo(){
-
-        if(this.meteoEvenement == meteo.NORMALE){
-            if(this.typeDeTerrain == typeTerrain.HERBE){
-                this.setTauxDeBlessures(10);
-            }
-            else if(this.typeDeTerrain == typeTerrain.SABLE){
-                this.setTauxDeBlessures(15);
-            }
-            else if(this.typeDeTerrain == typeTerrain.FIBRE){
-                this.setTauxDeBlessures(5);
-            }
-            else{
-                this.setTauxDeBlessures(15);
-            }
-        }
-
-        if(this.meteoEvenement == meteo.GRAND_SOLEIL){
-            if(this.typeDeTerrain == typeTerrain.HERBE){
-                this.setTauxDeBlessures(10);
-            }
-            else if(this.typeDeTerrain == typeTerrain.SABLE){
-                this.setTauxDeBlessures(10);
-            }
-            else if(this.typeDeTerrain == typeTerrain.FIBRE){
-                this.setTauxDeBlessures(5);
-            }
-            else{
-                this.setTauxDeBlessures(10);
-            }
-        }
-
-        if(this.meteoEvenement == meteo.PLUIE){
-            if(this.typeDeTerrain == typeTerrain.HERBE){
-                this.setTauxDeBlessures(25);
-            }
-            else if(this.typeDeTerrain == typeTerrain.SABLE){
-                this.setTauxDeBlessures(30);
-            }
-            else if(this.typeDeTerrain == typeTerrain.FIBRE){
-                this.setTauxDeBlessures(10);
-            }
-            else{
-                this.setTauxDeBlessures(15);
-            }
-        }
-
-        if(this.meteoEvenement == meteo.ORAGE){
-            if(this.typeDeTerrain == typeTerrain.HERBE){
-                this.setTauxDeBlessures(40);
-            }
-            else if(this.typeDeTerrain == typeTerrain.SABLE){
-                this.setTauxDeBlessures(45);
-            }
-            else if(this.typeDeTerrain == typeTerrain.FIBRE){
-                this.setTauxDeBlessures(15);
-            }
-            else{
-                this.setTauxDeBlessures(40);
-            }
-        }
-
-    }
-
-
 
     // Getter Setter
+
 
 
     public int getIdTerrain() {

@@ -124,18 +124,18 @@ public class Course {
                 case Mort -> malusBlessure = 100;
             }
             if (cheval.getTypeDeFer() == Cheval.TypeDeFer.Avec){
-                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.fibre ||
-                        terrain.getTypeDeTerrain() == Terrain.typeTerrain.sable ){
+                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE ||
+                        terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE ){
                     malusFerTerrain = 0.05;
                 }
             }
             else {
-                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.herbe){
+                if (terrain.getTypeDeTerrain() == Terrain.typeTerrain.HERBE){
                     malusFerTerrain = 0.05;
                 }
             }
             if (cheval.getCouleurDesYeux() == Cheval.CouleurDesYeux.Bleu &&
-                terrain.getMeteoEvenement() == Terrain.meteo.grandSoleil){
+                terrain.getMeteoEvenement() == Terrain.meteo.GRAND_SOLEIL){
                 malusCouleurYeuxTerrain = 0.5;
             }
 
@@ -152,18 +152,19 @@ public class Course {
     public List<Integer> calculerTempsRealise(){
         List<Integer> listeTemps = new ArrayList<>();
         for (Cheval cheval : listeCheval){
-            List<Integer> listeDisanceParcourue = new ArrayList<>();
-            listeDisanceParcourue.add(0);
+            int tempID = Math.toIntExact(cheval.getIdCheval());
+            List<Integer> listeDistanceParcourue = new ArrayList<>();
+            listeDistanceParcourue.add(0);
             double rdAcceleration = (Math.random() * 0.2) ;
             double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
             int i = 1;
-            while ( (terrain.getLongueur() > Collections.max(listeDisanceParcourue) ) ){
-                listeDisanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
-                        + Collections.max(listeDisanceParcourue) ));
+            while ( (terrain.getLongueur() > Collections.max(listeDistanceParcourue) ) ){
+                listeDistanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
+                        + Collections.max(listeDistanceParcourue) ));
                 i++;
             }
-            cheval.setTempsRealise(listeDisanceParcourue);
-            listeTemps.add(listeDisanceParcourue.size());
+            cheval.setTempsRealise(listeDistanceParcourue);
+            listeTemps.add(listeDistanceParcourue.size());
         }
         return listeTemps;
     }

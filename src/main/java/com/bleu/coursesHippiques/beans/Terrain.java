@@ -63,19 +63,19 @@ public class Terrain {
         int n = rand.nextInt(4);
         switch(n){
             case 0:
-                this.setMeteoEvenement(meteo.valueOf("normale"));
+                this.setMeteoEvenement(meteo.valueOf("NORMALE"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             case 1:
-                this.setMeteoEvenement(meteo.valueOf("grandSoleil"));
+                this.setMeteoEvenement(meteo.valueOf("GRAND_SOLEIL"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             case 2:
-                this.setMeteoEvenement(meteo.valueOf("pluie"));
+                this.setMeteoEvenement(meteo.valueOf("PLUIE"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             case 3:
-                this.setMeteoEvenement(meteo.valueOf("orage"));
+                this.setMeteoEvenement(meteo.valueOf("ORAGE"));
                 this.setTauxDeBlessuresSelonMeteo();
                 break;
             default:

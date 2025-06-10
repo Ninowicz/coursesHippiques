@@ -2,6 +2,7 @@ package com.bleu.coursesHippiques.controllers;
 
 import com.bleu.coursesHippiques.beans.Cheval;
 import com.bleu.coursesHippiques.beans.Course;
+import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.beans.Terrain;
 import com.bleu.coursesHippiques.repositories.ChevalRepository;
 import com.bleu.coursesHippiques.repositories.CourseRepository;
@@ -36,9 +37,34 @@ public class CourseController {
         this.terrainRepository = terrainRepository;
     }
 
-    @PostMapping("ajouterCourse")
-    public ResponseEntity<Course> ajouterCourse() {
+    @PostMapping("ajouterCourseFibre")
+    public ResponseEntity<Course> ajouterCourseFibre() {
         Terrain terrain = new Terrain();
+        terrain.setTypeDeTerrain(Terrain.typeTerrain.FIBRE);
+        terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
+        //terrain.setConditionsAleatoires();
+        terrainServices.setConditionsAleatoires(terrain);
+
+        Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
+
+        return ResponseEntity.ok(test);
+    }
+    @PostMapping("ajouterCourseHerbe")
+    public ResponseEntity<Course> ajouterCourseHerbe() {
+        Terrain terrain = new Terrain();
+        terrain.setTypeDeTerrain(Terrain.typeTerrain.HERBE);
+        terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
+        //terrain.setConditionsAleatoires();
+        terrainServices.setConditionsAleatoires(terrain);
+
+        Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
+
+        return ResponseEntity.ok(test);
+    }
+    @PostMapping("ajouterCourseSable")
+    public ResponseEntity<Course> ajouterCourseSable() {
+        Terrain terrain = new Terrain();
+        terrain.setTypeDeTerrain(Terrain.typeTerrain.SABLE);
         terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
         //terrain.setConditionsAleatoires();
         terrainServices.setConditionsAleatoires(terrain);
@@ -54,9 +80,8 @@ public class CourseController {
         return ResponseEntity.ok(listeCourses);
     }
 
-    @GetMapping("testCourse")
-    public ResponseEntity<Course> testCourse() {
-        int id = 1;
+    @PostMapping("testCourse")
+    public ResponseEntity<Course> testCourse(@RequestBody int id) {
         courseServices.calculerMalus(id);
         courseServices.calculerCote(id);
         courseServices.calculerTempsRealise(id);

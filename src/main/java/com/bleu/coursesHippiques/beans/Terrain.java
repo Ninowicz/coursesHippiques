@@ -38,6 +38,7 @@ public class Terrain {
     @Enumerated(EnumType.STRING)
     private meteo meteoEvenement;
     private int tauxDeBlessures; // Valeur entre 0 et 100
+    //Test
 
 
     // Constructeurs

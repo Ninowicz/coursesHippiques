@@ -4,11 +4,9 @@ import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.repositories.JoueurRepository;
 import com.bleu.coursesHippiques.services.JoueurServices;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/courses/hippiques/joueur")
 public class JoueurController {

@@ -1,8 +1,10 @@
 package com.bleu.coursesHippiques.beans;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Course {
 
     public enum typeCourse{
@@ -70,7 +72,6 @@ public class Course {
     // Constructeurs
     public Course() {
     }
-
     public Course(String nomCourse, List<Cheval> listeCheval, Terrain terrain) {
         this.nomCourse = nomCourse;
         this.listeCheval = listeCheval;
@@ -79,7 +80,6 @@ public class Course {
         this.nbTours = 1;
         this.typeDeCourse = typeCourse.PLAT;
     }
-
     public Course(String nomCourse, typeCourse typeDeCourse, int nbTours,List<Cheval> listeCheval, Terrain terrain) {
         this.nomCourse = nomCourse;
         this.typeDeCourse = typeDeCourse;
@@ -90,7 +90,6 @@ public class Course {
     }
 
     // Methodes
-
     @Override
     public String toString() {
         return "Course{" +

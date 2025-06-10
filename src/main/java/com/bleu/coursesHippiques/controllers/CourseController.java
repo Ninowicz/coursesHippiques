@@ -10,13 +10,12 @@ import com.bleu.coursesHippiques.services.ChevalServices;
 import com.bleu.coursesHippiques.services.CourseServices;
 import com.bleu.coursesHippiques.services.TerrainServices;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/courses/hippiques/course")
 public class CourseController {
@@ -56,20 +55,21 @@ public class CourseController {
     }
 
     @GetMapping("testCourse")
-    public List<Cheval> testCourse() {
-
-        courseServices.calculerMalus(1);
-        courseServices.calculerCote(1);
-        courseServices.calculerTempsRealise(1);
-        courseServices.calculerBlessure(1);
-        List<Cheval> temps =  courseServices.podium(1);
+    public ResponseEntity<Course> testCourse() {
+        int id = 1;
+        courseServices.calculerMalus(id);
+        courseServices.calculerCote(id);
+        courseServices.calculerTempsRealise(id);
+        courseServices.calculerBlessure(id);
+        List<Cheval> temps =  courseServices.podium(id);
 
         for (Cheval cheval : temps){
             chevalRepository.save(cheval);
         }
-        System.out.println(temps);
 
-        return temps;
+        Course course = courseRepository.findById(id);
+
+        return ResponseEntity.ok(course);
     }
 
 

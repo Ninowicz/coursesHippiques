@@ -1,6 +1,7 @@
 package com.bleu.coursesHippiques.services;
 
 import com.bleu.coursesHippiques.beans.Cheval;
+import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.beans.Pari;
 import com.bleu.coursesHippiques.beans.Resultat;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,10 @@ import java.util.List;
 
 @Service
 public class ResultatServices {
+
+    public void traitementArgentJoueur(Resultat monResultat, Joueur monjoueur){
+        monjoueur.setArgent(monjoueur.getArgent() + monResultat.getGainJoueur());
+    }
 
     public Resultat genererResultat(List<Cheval> classement, Pari pari) {
         Resultat resultat = new Resultat(classement, pari);

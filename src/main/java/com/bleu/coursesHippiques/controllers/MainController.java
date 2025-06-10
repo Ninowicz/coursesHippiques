@@ -1,11 +1,9 @@
 package com.bleu.coursesHippiques.controllers;
 
-import com.bleu.coursesHippiques.beans.Cheval;
-import com.bleu.coursesHippiques.beans.Pari;
-import com.bleu.coursesHippiques.beans.Resultat;
-import com.bleu.coursesHippiques.beans.Terrain;
+import com.bleu.coursesHippiques.beans.*;
 import com.bleu.coursesHippiques.repositories.*;
 import com.bleu.coursesHippiques.services.ChevalServices;
+import com.bleu.coursesHippiques.services.PariServices;
 import com.bleu.coursesHippiques.services.ResultatServices;
 import com.bleu.coursesHippiques.services.TerrainServices;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +28,9 @@ public class MainController {
     private final ChevalServices chevalServices;
     private final TerrainServices terrainsServices;
     private final ResultatServices resultatServices;
+    private final PariServices pariServices;
 
-    public MainController(CourseRepository courseRepository, ChevalRepository chevalRepository, TerrainRepository terrainRepository, ChevalServices chevalServices, TerrainServices terrainsServices, PariRepository pariRepository, ResultatRepository resultatRepository,ResultatServices resultatServices) {
+    public MainController(CourseRepository courseRepository, ChevalRepository chevalRepository, TerrainRepository terrainRepository, ChevalServices chevalServices, TerrainServices terrainsServices, PariRepository pariRepository, ResultatRepository resultatRepository, ResultatServices resultatServices, PariServices pariServices) {
 
         // Repository
         this.courseRepository = courseRepository;
@@ -43,6 +42,7 @@ public class MainController {
         this.chevalServices = chevalServices;
         this.terrainsServices = terrainsServices;
         this.resultatServices = resultatServices;
+        this.pariServices = pariServices;
     }
 
     @PostMapping("initBaseDeDonnee")
@@ -71,13 +71,18 @@ public class MainController {
     public ResponseEntity<String> simulationPariEtResultat() {
 
         // 1. Récupérer un cheval existant
+        Joueur monjoueur = new Joueur("admin", "password");
+        monjoueur.setArgent(1000);
         Cheval cheval = chevalRepository.findById(1).orElse(null);
         if (cheval == null) {
             return ResponseEntity.badRequest().body("Cheval ID 1 manquant");
         }
 
         // 2. Créer un pari SIMPLE avec ce cheval
+        cheval.setCote(2);
         Pari pari = Pari.creerPariSimple(50, cheval);
+        monjoueur.setPari(pari);
+        pariServices.traitementMiseJoueur(monjoueur);
         pariRepository.save(pari); // optionnel ici, juste pour trace
 
         // 3. Simuler un classement (le cheval gagne)
@@ -90,7 +95,9 @@ public class MainController {
         // resultatRepository.save(resultat);
 
         // 6. Retourner le résultat sous forme de message
+
+        resultatServices.traitementArgentJoueur(resultat, monjoueur);
         return ResponseEntity.ok("Pari gagné ? " + resultat.isPariGagne()
-                + " - Gain : " + resultat.getGainJoueur());
+                + " - Gain : " + resultat.getGainJoueur() + " nouvelle banque : " + monjoueur.getArgent());
     }
 }

@@ -5,8 +5,10 @@ import com.bleu.coursesHippiques.beans.Course;
 import com.bleu.coursesHippiques.beans.Terrain;
 import com.bleu.coursesHippiques.repositories.ChevalRepository;
 import com.bleu.coursesHippiques.repositories.CourseRepository;
+import com.bleu.coursesHippiques.repositories.TerrainRepository;
 import com.bleu.coursesHippiques.services.ChevalServices;
 import com.bleu.coursesHippiques.services.CourseServices;
+import com.bleu.coursesHippiques.services.TerrainServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,19 +25,24 @@ public class CourseController {
     private final ChevalServices chevalServices;
     private final CourseRepository courseRepository;
     private final CourseServices courseServices;
+    private final TerrainServices terrainServices;
+    private final TerrainRepository terrainRepository;
 
-    public CourseController(ChevalRepository chevalRepository, ChevalServices chevalServices, CourseRepository courseRepository, CourseServices courseServices) {
+    public CourseController(ChevalRepository chevalRepository, ChevalServices chevalServices, CourseRepository courseRepository, CourseServices courseServices, TerrainServices terrainServices, TerrainRepository terrainRepository) {
         this.chevalRepository = chevalRepository;
         this.chevalServices = chevalServices;
         this.courseRepository = courseRepository;
         this.courseServices = courseServices;
+        this.terrainServices = terrainServices;
+        this.terrainRepository = terrainRepository;
     }
 
     @PostMapping("ajouterCourse")
     public ResponseEntity<Course> ajouterCourse() {
         Terrain terrain = new Terrain();
         terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
-        terrain.setConditionsAleatoires();
+        //terrain.setConditionsAleatoires();
+        terrainServices.setConditionsAleatoires(terrain);
 
         Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
 

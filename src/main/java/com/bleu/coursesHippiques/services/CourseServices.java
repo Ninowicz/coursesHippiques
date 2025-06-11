@@ -100,7 +100,7 @@ public class CourseServices {
             }
             if (cheval.getCouleurDesYeux() == Cheval.CouleurDesYeux.Bleu &&
                     terrain.getMeteoEvenement() == Terrain.meteo.GRAND_SOLEIL){
-                malusCouleurYeuxTerrain = 0.5;
+                malusCouleurYeuxTerrain = 0.05;
             }
 
             //* Premiere ligne malus en fonction de l'age, max age = 10 => malus max
@@ -120,12 +120,14 @@ public class CourseServices {
         for (Cheval cheval : listeCheval ){
             List<Integer> listeDistanceParcourue = new ArrayList<>();
             listeDistanceParcourue.add(0);
-            double rdAcceleration = (Math.random() * 0.2) ;
-            double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
             int i = 1;
             while ( (terrain.getLongueur()*course.getNbTours() > Collections.max(listeDistanceParcourue) ) ){
-                listeDistanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
-                        + Collections.max(listeDistanceParcourue) ));
+                double rdAcceleration = (Math.random() * 0.2) ;
+                double rdAleaVMax = (Math.random() * cheval.getMalus()/10)+(1-cheval.getMalus()/10) ;
+                double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
+                double distanceSup = Math.min(i*accelerationReelle,cheval.getVitesseMax())*1000/(60*60)*rdAleaVMax;
+                listeDistanceParcourue.add((int) ( distanceSup + Collections.max(listeDistanceParcourue) ));
+                System.out.println(distanceSup);
                 i++;
             }
 

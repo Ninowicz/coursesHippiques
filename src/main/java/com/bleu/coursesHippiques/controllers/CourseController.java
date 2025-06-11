@@ -13,6 +13,8 @@ import com.bleu.coursesHippiques.services.TerrainServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -37,6 +39,32 @@ public class CourseController {
         this.terrainRepository = terrainRepository;
     }
 
+    @PostMapping("creerListeCourses")
+    public ResponseEntity<List<Course>> creerListeCourse(){
+        int nbCourse = 3;
+        List<Course> listeCourses = new ArrayList<>();
+        for (int i = 0; i < nbCourse; i++){
+
+            List<Terrain> listeTerrains = terrainRepository.findAll();
+            Collections.shuffle(listeTerrains);
+            Terrain terrainCourse = listeTerrains.getFirst();
+
+            String nomCourse = "Course n°" + (i + 1) + "; Terrain = " + terrainCourse.getNomTerrain() + "; Meteo = " + terrainCourse.getMeteoEvenement();
+
+            int nbChevaux = (int) (Math.random() * (16 - 6) )+ 6;
+            List<Cheval> listeChevaux = chevalRepository.findAll();
+            Collections.shuffle(listeChevaux);
+            List<Cheval> listeChevauxCourse = new ArrayList<>();
+            for (int k = 0; k < nbChevaux; k++){
+                listeChevauxCourse.add(listeChevaux.get(k));
+            }
+
+            Course course = new Course(nomCourse,listeChevauxCourse,terrainCourse);
+            courseRepository.save(course);
+            listeCourses.add(course);
+        }
+        return ResponseEntity.ok(listeCourses);
+    }
     @PostMapping("ajouterCourseFibre")
     public ResponseEntity<Course> ajouterCourseFibre() {
         Terrain terrain = new Terrain();
@@ -68,6 +96,15 @@ public class CourseController {
         terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
         //terrain.setConditionsAleatoires();
         terrainServices.setConditionsAleatoires(terrain);
+        int nbChevaux = (int)(Math.random() * 7);
+        List<Cheval> listeChevaux = new ArrayList<>();
+        for (int i = 0; i<nbChevaux; i++){
+            int numCheval = (int) (Math.random() * chevalRepository.findAll().size());
+        }
+
+
+        System.out.println(chevalRepository.findAll().size());
+
 
         Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
 
@@ -86,11 +123,7 @@ public class CourseController {
         courseServices.calculerCote(id);
         courseServices.calculerTempsRealise(id);
         courseServices.calculerBlessure(id);
-        List<Cheval> temps =  courseServices.podium(id);
 
-        for (Cheval cheval : temps){
-            chevalRepository.save(cheval);
-        }
 
         Course course = courseRepository.findById(id);
 

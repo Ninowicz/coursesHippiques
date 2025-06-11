@@ -7,4 +7,5 @@ public interface JoueurRepository extends JpaRepository<Joueur, Integer> {
 
 
     Joueur findByUsername(String username);
+    Joueur findById(int id);
 }

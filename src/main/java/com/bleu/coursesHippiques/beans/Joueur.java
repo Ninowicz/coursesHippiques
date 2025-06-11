@@ -69,6 +69,16 @@ public class Joueur {
     }
 
     public void setPari(Pari pari) {
+
+        // Verification que la mise ne dépasse pas la banque du joueur
+        if(pari.getMise() > this.getArgent()){
+            pari.setMise(this.getArgent());
+        }
+        // Ni qu'elle soit négative
+        else if(pari.getMise() < 0){
+            pari.setMise(0);
+        }
+        // Si tout va bien, on ne change rien
         this.pari = pari;
     }
 }

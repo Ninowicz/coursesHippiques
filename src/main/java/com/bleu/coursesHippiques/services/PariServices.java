@@ -10,10 +10,6 @@ import java.util.Optional;
 @Service
 public class PariServices {
 
-    public void traitementMiseJoueur(Joueur monJoueur){
-        monJoueur.setArgent(monJoueur.getArgent()-monJoueur.getPari().getMise());
-    }
-
     private final PariRepository pariRepository;
 
     public PariServices(PariRepository pariRepository) {

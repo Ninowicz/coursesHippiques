@@ -19,7 +19,7 @@ public class Pari {
 
     @Enumerated(EnumType.STRING)
     private TypeDePari typePari;
-    private int mise;
+    private double mise;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Cheval> chevalChoisi;
@@ -28,7 +28,7 @@ public class Pari {
 
     public Pari() {}
 
-    private Pari(TypeDePari typePari, int mise, List<Cheval> chevalChoisi) {
+    private Pari(TypeDePari typePari, double mise, List<Cheval> chevalChoisi) {
         this.typePari = typePari;
         this.mise = mise;
         this.chevalChoisi = chevalChoisi;
@@ -40,7 +40,7 @@ public class Pari {
         // Pari monPari = Pari.creerPariSimple(50, cheval1);
         //
 
-    public static Pari creerPariSimple(int mise, Cheval cheval) {
+    public static Pari creerPariSimple(double mise, Cheval cheval) {
         return new Pari(TypeDePari.SIMPLE, mise, List.of(cheval));
     }
     //public static Pari creerPariDouble(int mise, Cheval cheval){}
@@ -61,7 +61,7 @@ public class Pari {
         return typePari;
     }
 
-    public int getMise() {
+    public double getMise() {
         return mise;
     }
 
@@ -77,7 +77,7 @@ public class Pari {
         this.typePari = typePari;
     }
 
-    public void setMise(int mise) {
+    public void setMise(double mise) {
         this.mise = mise;
     }
 

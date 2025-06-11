@@ -12,7 +12,15 @@ import java.util.List;
 public class ResultatServices {
 
     public void traitementArgentJoueur(Resultat monResultat, Joueur monjoueur){
-        monjoueur.setArgent(monjoueur.getArgent() + monResultat.getGainJoueur());
+
+        double banqueJoueur = monjoueur.getArgent();
+        double gainJoueur = monResultat.getGainJoueur();
+        double miseJoueur = monjoueur.getPari().getMise();
+
+        // Le gain peut etre 0
+        // La mise est soustraite au moment du traitement et plus au moment du pari
+        monjoueur.setArgent(banqueJoueur - miseJoueur + gainJoueur);
+
     }
 
     public Resultat genererResultat(List<Cheval> classement, Pari pari) {

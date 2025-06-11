@@ -39,7 +39,7 @@ public class CourseController {
         this.terrainRepository = terrainRepository;
     }
 
-    @PostMapping("creerListeCourses")
+    @GetMapping("creerListeCourses")
     public ResponseEntity<List<Course>> creerListeCourse(){
         int nbCourse = 3;
         List<Course> listeCourses = new ArrayList<>();

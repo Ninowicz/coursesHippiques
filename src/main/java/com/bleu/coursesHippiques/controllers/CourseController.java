@@ -48,7 +48,7 @@ public class CourseController {
             List<Terrain> listeTerrains = terrainRepository.findAll();
             Collections.shuffle(listeTerrains);
             Terrain terrainCourse = listeTerrains.getFirst();
-
+            terrainServices.setConditionsAleatoires(terrainCourse);
             String nomCourse = "Course n°" + (i + 1) + "; Terrain = " + terrainCourse.getNomTerrain() + "; Meteo = " + terrainCourse.getMeteoEvenement();
 
             int nbChevaux = (int) (Math.random() * (16 - 6) )+ 6;

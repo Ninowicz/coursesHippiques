@@ -100,7 +100,7 @@ public class CourseServices {
             }
             if (cheval.getCouleurDesYeux() == Cheval.CouleurDesYeux.Bleu &&
                     terrain.getMeteoEvenement() == Terrain.meteo.GRAND_SOLEIL){
-                malusCouleurYeuxTerrain = 0.5;
+                malusCouleurYeuxTerrain = 0.05;
             }
 
             //* Premiere ligne malus en fonction de l'age, max age = 10 => malus max
@@ -120,14 +120,23 @@ public class CourseServices {
         for (Cheval cheval : listeCheval ){
             List<Integer> listeDistanceParcourue = new ArrayList<>();
             listeDistanceParcourue.add(0);
-            double rdAcceleration = (Math.random() * 0.2) ;
-            double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
             int i = 1;
-            while ( (terrain.getLongueur() > Collections.max(listeDistanceParcourue) ) ){
-                listeDistanceParcourue.add((int) ( Math.min(i*accelerationReelle,cheval.getVitesseMax())
-                        + Collections.max(listeDistanceParcourue) ));
+            while ( (terrain.getLongueur()*course.getNbTours() > Collections.max(listeDistanceParcourue) ) ){
+                double rdAcceleration = (Math.random() * 0.2) ;
+                double rdAleaVMax = (Math.random() * cheval.getMalus()/10)+(1-cheval.getMalus()/10) ;
+                double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
+                double distanceSup = Math.min(i*accelerationReelle,cheval.getVitesseMax())*1000/(60*60)*rdAleaVMax;
+                listeDistanceParcourue.add((int) ( distanceSup + Collections.max(listeDistanceParcourue) ));
+                System.out.println(distanceSup);
                 i++;
             }
+
+            int sec = listeDistanceParcourue.size()-1;
+            int diff1 = listeDistanceParcourue.getLast()-terrain.getLongueur()*course.getNbTours();
+            int diff2 = terrain.getLongueur()*course.getNbTours() - listeDistanceParcourue.get(listeDistanceParcourue.size()-2);
+            double reste = (double) diff2 /(diff2+diff1);
+
+            cheval.setDernierTemps(reste + sec);
             cheval.setTempsRealise(listeDistanceParcourue);
         }
     }
@@ -148,14 +157,12 @@ public class CourseServices {
         Course course = courseRepository.getReferenceById(ID);
         Terrain terrain = course.getTerrain();
         List<Cheval> listeCheval = course.getListeCheval();
-        Comparator<Cheval> comparatorDistanceParcourues = (c1, c2) -> {
-            return Collections.max(c1.getTempsRealise()) -
-                    Collections.max(c2.getTempsRealise());
-        };
         Comparator<Cheval> comparatorTemps = (c1, c2) -> {
-            return c1.getTempsRealise().size() - c2.getTempsRealise().size();
+            return (int) (c1.getDernierTemps() -
+                                c2.getDernierTemps());
         };
-        listeCheval.sort(comparatorDistanceParcourues);
+
+        listeCheval.sort(comparatorTemps);
         listeCheval.sort(comparatorTemps);
 
         return listeCheval;

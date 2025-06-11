@@ -34,6 +34,7 @@ public class Cheval {
     private double malus;
     private double cote;
     private List<Integer> tempsRealise = new ArrayList<>();
+    private double dernierTemps;
 
 
     // Methodes
@@ -162,6 +163,14 @@ public class Cheval {
     }
 
     // Getter Setters
+
+
+    public double getDernierTemps() {
+        return dernierTemps;
+    }
+    public void setDernierTemps(double dernierTemps) {
+        this.dernierTemps = dernierTemps;
+    }
 
     public long getIdCheval() {
         return idCheval;

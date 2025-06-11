@@ -13,6 +13,11 @@ public class JoueurServices {
         this.joueurRepository = joueurRepository;
     }
 
+    public Joueur recuperationInfoJoueur(int id) {
+        return joueurRepository.findById(id);
+    }
+
+
     public int tentativeConnectionJoueur(String username, String password) {
         Joueur joueur = joueurRepository.findByUsername(username);
 

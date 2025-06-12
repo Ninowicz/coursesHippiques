@@ -15,6 +15,8 @@ public class Joueur {
     private double argent;
     @OneToOne
     private Pari pari;
+    private int nbPartiesGagnees;
+    private int nbPartiesJouees;
 
 
     // Constructeurs
@@ -54,6 +56,22 @@ public class Joueur {
 
     public int getIdJoueur() {
         return idJoueur;
+    }
+
+    public int getNbPartiesGagnees() {
+        return nbPartiesGagnees;
+    }
+
+    public void setNbPartiesGagnees(int nbPartiesGagnees) {
+        this.nbPartiesGagnees = nbPartiesGagnees;
+    }
+
+    public int getNbPartiesJouees() {
+        return nbPartiesJouees;
+    }
+
+    public void setNbPartiesJouees(int nbPartiesJouees) {
+        this.nbPartiesJouees = nbPartiesJouees;
     }
 
     public void setIdJoueur(int idJoueur) {

@@ -51,7 +51,7 @@ public class CourseController {
             terrainServices.setConditionsAleatoires(terrainCourse);
             String nomCourse = "Course n°" + (i + 1) + "; Terrain = " + terrainCourse.getNomTerrain() + "; Meteo = " + terrainCourse.getMeteoEvenement();
 
-            int nbChevaux = (int) (Math.random() * (16 - 6) )+ 6;
+            int nbChevaux = (int) (Math.random() * (8 - 4) )+ 4;
             List<Cheval> listeChevaux = chevalRepository.findAll();
             Collections.shuffle(listeChevaux);
             List<Cheval> listeChevauxCourse = new ArrayList<>();
@@ -125,6 +125,14 @@ public class CourseController {
         courseServices.calculerBlessure(id);
 
 
+        Course course = courseRepository.findById(id);
+
+        return ResponseEntity.ok(course);
+    }
+
+    @PostMapping("finCourse")
+    public ResponseEntity<Course> finCourse(@RequestBody int id) {
+        courseServices.podium(id);
         Course course = courseRepository.findById(id);
 
         return ResponseEntity.ok(course);

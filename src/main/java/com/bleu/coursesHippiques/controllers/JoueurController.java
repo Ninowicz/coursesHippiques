@@ -36,6 +36,22 @@ public class JoueurController {
         return ResponseEntity.ok(joueur);
     }
 
+    @PostMapping("affichageprofil2")
+    public ResponseEntity<Joueur> affichageProfil2(@RequestBody Integer idDuJoueur) {
+        Joueur joueur = joueurServices.recuperationInfoJoueur(idDuJoueur);
+
+        if (joueur == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(joueur);
+    }
+
+    @PostMapping("saveJoueur")
+    public ResponseEntity<Joueur> saveJoueur(@RequestBody Joueur joueur) {
+        joueurRepository.save(joueur);
+        return ResponseEntity.ok(joueur);
+    }
+
     @PostMapping("tentativeconnectionjoueur")
     public ResponseEntity<String> tentativeConnectionJoueur(@RequestBody Joueur joueur) {
 

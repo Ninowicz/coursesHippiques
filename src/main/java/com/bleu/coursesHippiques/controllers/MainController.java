@@ -31,8 +31,9 @@ public class MainController {
     private final ResultatServices resultatServices;
     private final PariServices pariServices;
     private final CourseServices courseServices;
+    private final JoueurServices joueurServices;
 
-    public MainController(CourseRepository courseRepository, ChevalRepository chevalRepository, TerrainRepository terrainRepository, JoueurRepository joueurRepository, OmegaRepository omegaRepository, ChevalServices chevalServices, TerrainServices terrainsServices, PariRepository pariRepository, ResultatRepository resultatRepository, ResultatServices resultatServices, PariServices pariServices, CourseServices courseServices) {
+    public MainController(CourseRepository courseRepository, ChevalRepository chevalRepository, TerrainRepository terrainRepository, JoueurRepository joueurRepository, OmegaRepository omegaRepository, ChevalServices chevalServices, TerrainServices terrainsServices, PariRepository pariRepository, ResultatRepository resultatRepository, ResultatServices resultatServices, PariServices pariServices, CourseServices courseServices, JoueurServices joueurServices) {
 
         // Repository
         this.courseRepository = courseRepository;
@@ -48,6 +49,7 @@ public class MainController {
         this.resultatServices = resultatServices;
         this.pariServices = pariServices;
         this.courseServices = courseServices;
+        this.joueurServices = joueurServices;
     }
 
     @PostMapping("initBaseDeDonnee")
@@ -312,6 +314,17 @@ public class MainController {
         }
     }
 
+
+    @PostMapping("setParisJoueurRd")
+    public ResponseEntity<Joueur> setParisJoueurRd(@RequestBody int idDuJoueur) {
+        Joueur joueur = joueurServices.recuperationInfoJoueur(idDuJoueur);
+        Pari pari = Pari.creerPariSimple(50, chevalRepository.findById(1).orElse(null));
+        pariRepository.save(pari);
+        joueur.setPari(pari);
+        joueurRepository.save(joueur);
+
+        return ResponseEntity.ok(joueur);
+    }
 
 
 

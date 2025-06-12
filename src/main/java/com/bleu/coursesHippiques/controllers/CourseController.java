@@ -1,21 +1,22 @@
 package com.bleu.coursesHippiques.controllers;
 
-import com.bleu.coursesHippiques.beans.Cheval;
-import com.bleu.coursesHippiques.beans.Course;
-import com.bleu.coursesHippiques.beans.Joueur;
-import com.bleu.coursesHippiques.beans.Terrain;
+import com.bleu.coursesHippiques.beans.*;
 import com.bleu.coursesHippiques.repositories.ChevalRepository;
 import com.bleu.coursesHippiques.repositories.CourseRepository;
+import com.bleu.coursesHippiques.repositories.JoueurRepository;
 import com.bleu.coursesHippiques.repositories.TerrainRepository;
 import com.bleu.coursesHippiques.services.ChevalServices;
 import com.bleu.coursesHippiques.services.CourseServices;
+import com.bleu.coursesHippiques.services.JoueurServices;
 import com.bleu.coursesHippiques.services.TerrainServices;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin
@@ -25,18 +26,25 @@ public class CourseController {
 
     private final ChevalRepository chevalRepository;
     private final ChevalServices chevalServices;
+
     private final CourseRepository courseRepository;
     private final CourseServices courseServices;
+
     private final TerrainServices terrainServices;
     private final TerrainRepository terrainRepository;
 
-    public CourseController(ChevalRepository chevalRepository, ChevalServices chevalServices, CourseRepository courseRepository, CourseServices courseServices, TerrainServices terrainServices, TerrainRepository terrainRepository) {
+    private final JoueurServices joueurServices;
+    private final JoueurRepository joueurRepository;
+
+    public CourseController(ChevalRepository chevalRepository, ChevalServices chevalServices, CourseRepository courseRepository, CourseServices courseServices, TerrainServices terrainServices, TerrainRepository terrainRepository, JoueurServices joueurServices, JoueurRepository joueurRepository) {
         this.chevalRepository = chevalRepository;
         this.chevalServices = chevalServices;
         this.courseRepository = courseRepository;
         this.courseServices = courseServices;
         this.terrainServices = terrainServices;
         this.terrainRepository = terrainRepository;
+        this.joueurServices = joueurServices;
+        this.joueurRepository = joueurRepository;
     }
 
     @GetMapping("creerListeCourses")
@@ -123,21 +131,20 @@ public class CourseController {
         courseServices.calculerCote(id);
         courseServices.calculerTempsRealise(id);
         courseServices.calculerBlessure(id);
-
-
         Course course = courseRepository.findById(id).orElse(null);
-
-
+        for (Cheval c : course.getListeCheval()) {
+            chevalRepository.save(c);
+        }
         return ResponseEntity.ok(course);
     }
 
-    @PostMapping("finCourse")
-    public ResponseEntity<Course> finCourse(@RequestBody int id) {
-        courseServices.podium(id);
-        Course course = courseRepository.findById(id).orElse(null);
-
-        return ResponseEntity.ok(course);
+    @PostMapping("podium")
+    public ResponseEntity<List<Cheval>> podium(@RequestBody int idCourse) {
+        List<Cheval> podium = courseServices.podium(idCourse);
+        return ResponseEntity.ok(podium);
     }
+
+
 
 
 }

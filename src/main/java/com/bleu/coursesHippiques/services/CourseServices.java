@@ -155,16 +155,12 @@ public class CourseServices {
 
     public List<Cheval> podium(Integer ID){
         Course course = courseRepository.getReferenceById(ID);
-        Terrain terrain = course.getTerrain();
         List<Cheval> listeCheval = course.getListeCheval();
         Comparator<Cheval> comparatorTemps = (c1, c2) -> {
             return (int) (c1.getDernierTemps() -
                                 c2.getDernierTemps());
         };
-
         listeCheval.sort(comparatorTemps);
-        listeCheval.sort(comparatorTemps);
-
         return listeCheval;
     }
 

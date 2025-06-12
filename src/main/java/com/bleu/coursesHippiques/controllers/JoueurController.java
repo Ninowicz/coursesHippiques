@@ -1,5 +1,6 @@
 package com.bleu.coursesHippiques.controllers;
 
+import com.bleu.coursesHippiques.DTO.PasswordUpdateDTO;
 import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.repositories.JoueurRepository;
 import com.bleu.coursesHippiques.services.JoueurServices;
@@ -45,5 +46,25 @@ public class JoueurController {
         }
 
         return ResponseEntity.ok(String.valueOf(id));
+    }
+
+    @PostMapping("modifPassword")
+    public ResponseEntity<String> modifPassword(@RequestBody PasswordUpdateDTO dto) {
+
+        String username = dto.getUsername();
+        String password = dto.getPassword();
+        String newPassword = dto.getNewPassword();
+        int id = joueurServices.modifPassword(username, password, newPassword);
+
+        if (id == -1) {
+            return ResponseEntity.status(401).body("Mot de passe incorrect");
+        }
+
+        if (id == -2) {
+            return ResponseEntity.status(401).body("Pseudo incorrect");
+        }
+        else {
+            return ResponseEntity.ok("mot de passe mis à jour !");
+        }
     }
 }

@@ -36,4 +36,24 @@ public class JoueurServices {
         }
     }
 
+    public int modifPassword(String username, String password, String newPassword) {
+        Joueur joueur = joueurRepository.findByUsername(username);
+
+        if (joueur != null && joueur.getPassword().equals(password)) {
+            System.out.println("connexion correcte !");
+            joueur.setPassword(newPassword);
+            joueurRepository.save(joueur);
+            System.out.println("Mot de passe mis à jour !");
+            return 1;
+        }
+        else if (joueur == null) {
+            System.out.println("Mauvais pseudo");
+            return -2;
+        }
+        else {
+            System.out.println("Mauvais mot de passe");
+            return -1;
+        }
+    }
+
 }

@@ -125,7 +125,8 @@ public class CourseController {
         courseServices.calculerBlessure(id);
 
 
-        Course course = courseRepository.findById(id);
+        Course course = courseRepository.findById(id).orElse(null);
+
 
         return ResponseEntity.ok(course);
     }

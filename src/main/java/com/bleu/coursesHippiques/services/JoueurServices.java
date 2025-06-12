@@ -14,7 +14,7 @@ public class JoueurServices {
     }
 
     public Joueur recuperationInfoJoueur(int id) {
-        return joueurRepository.findById(id);
+        return joueurRepository.findById(id).orElse(null);
     }
 
 

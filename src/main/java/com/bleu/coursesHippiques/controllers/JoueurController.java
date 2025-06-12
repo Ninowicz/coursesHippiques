@@ -1,6 +1,7 @@
 package com.bleu.coursesHippiques.controllers;
 
 import com.bleu.coursesHippiques.DTO.PasswordUpdateDTO;
+import com.bleu.coursesHippiques.DTO.PseudoUpdateDTO;
 import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.repositories.JoueurRepository;
 import com.bleu.coursesHippiques.services.JoueurServices;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin
@@ -49,22 +51,49 @@ public class JoueurController {
     }
 
     @PostMapping("modifPassword")
-    public ResponseEntity<String> modifPassword(@RequestBody PasswordUpdateDTO dto) {
-
+    public ResponseEntity<Map<String, String>> modifPassword(@RequestBody PasswordUpdateDTO dto) {
         String username = dto.getUsername();
         String password = dto.getPassword();
         String newPassword = dto.getNewPassword();
         int id = joueurServices.modifPassword(username, password, newPassword);
 
+        Map<String, String> response = new HashMap<>();
+
         if (id == -1) {
-            return ResponseEntity.status(401).body("Mot de passe incorrect");
+            response.put("message", "Mot de passe incorrect");
+            return ResponseEntity.status(401).body(response);
         }
 
         if (id == -2) {
-            return ResponseEntity.status(401).body("Pseudo incorrect");
+            response.put("message", "Pseudo incorrect");
+            return ResponseEntity.status(401).body(response);
         }
-        else {
-            return ResponseEntity.ok("mot de passe mis à jour !");
-        }
+
+        response.put("message", "Mot de passe mis à jour !");
+        return ResponseEntity.ok(response);
     }
+
+    @PostMapping("modifPseudo")
+    public ResponseEntity<Map<String, String>> modifPseudo(@RequestBody PseudoUpdateDTO dto) {
+        String username = dto.getUsername();
+        String newUsername = dto.getNewUsername();
+        String password = dto.getPassword();
+        int id = joueurServices.modifPseudo(username, password, newUsername);
+
+        Map<String, String> response = new HashMap<>();
+
+        if (id == -1) {
+            response.put("message", "Mot de passe incorrect");
+            return ResponseEntity.status(401).body(response);
+        }
+
+        if (id == -2) {
+            response.put("message", "Pseudo incorrect");
+            return ResponseEntity.status(401).body(response);
+        }
+
+        response.put("message", "Pseudo mis à jour !");
+        return ResponseEntity.ok(response);
+    }
+
 }

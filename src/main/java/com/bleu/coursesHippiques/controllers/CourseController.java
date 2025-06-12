@@ -134,7 +134,7 @@ public class CourseController {
     @PostMapping("finCourse")
     public ResponseEntity<Course> finCourse(@RequestBody int id) {
         courseServices.podium(id);
-        Course course = courseRepository.findById(id);
+        Course course = courseRepository.findById(id).orElse(null);
 
         return ResponseEntity.ok(course);
     }

@@ -173,32 +173,42 @@ public class MainController {
         return ResponseEntity.ok("Joueur lié à Omega avec ID: " + monJoueur.getIdJoueur() + "\nIdJoueurOmega : " + monOmega.getJoueur().getIdJoueur());
     }
 
-    @PostMapping("initPariOmega/")
-    public ResponseEntity<String> initPariOmega(@RequestBody PariDTO pariDTO) {
-        Omega omega = omegaRepository.findById(1).orElse(null);
-        if (omega == null) return ResponseEntity.badRequest().body("Omega non trouvé");
+    @PostMapping("setJoueurIdOmega/")
+    public ResponseEntity<String> setJoueurAvecIdOmega(@RequestBody int IdJoueur) {
+        Omega monOmega = omegaRepository.findById(1).orElse(null);
+        if (monOmega == null) {
+            return ResponseEntity.ok("Omega 1 n'existe pas !");
+        }
 
-        Optional<Joueur> opt = joueurRepository.findById(1);
+        Joueur monJoueur = joueurRepository.findById(IdJoueur).orElse(null);
+        if (monJoueur == null) {
+            return ResponseEntity.ok("Joueur n'existe pas !");
+        }
 
-        Joueur joueur = null;
-        if (omega.getJoueur() != null) {
-            int idJoueur = omega.getJoueur().getIdJoueur();
-            joueur = joueurRepository.findById(idJoueur).orElse(null);
-        }else if (joueur == null) return ResponseEntity.badRequest().body("Joueur non trouvé dans Omega");
+        monOmega.setJoueur(monJoueur);
+        omegaRepository.save(monOmega);
+
+        return ResponseEntity.ok("Joueur lié à Omega avec ID: " + monJoueur.getIdJoueur() + "\nIdJoueurOmega : " + monOmega.getJoueur().getIdJoueur());
+    }
+
+    @PostMapping("initPariAvecIdJoueur/")
+    public ResponseEntity<String> initPariOmega(@RequestBody PariEtIdJoueurDTO pariEtIdJoueurDTO) {
+
+        Joueur joueur = joueurRepository.findById(pariEtIdJoueurDTO.getIdJoueur()).orElse(null);
 
         // Récupérer tous les chevaux à partir de leurs IDs
-        List<Cheval> chevaux = chevalRepository.findAllById(pariDTO.getIdChevaux());
-        if (chevaux.size() != pariDTO.getIdChevaux().size()) {
+        List<Cheval> chevaux = chevalRepository.findAllById(pariEtIdJoueurDTO.getIdChevaux());
+        if (chevaux.size() != pariEtIdJoueurDTO.getIdChevaux().size()) {
             return ResponseEntity.badRequest().body("Un ou plusieurs chevaux sont introuvables");
         }
 
         // Créer le Pari selon le nombre de chevaux
         Pari pari;
         if (chevaux.size() == 1) {
-            pari = Pari.creerPariSimple(pariDTO.getMise(), chevaux.get(0));
+            pari = Pari.creerPariSimple(pariEtIdJoueurDTO.getMise(), chevaux.get(0));
         } else {
             // A RETIRER C EST JUSTE POUR QUE CA FONCTIONNE !!
-            pari = Pari.creerPariSimple(pariDTO.getMise(), chevaux.get(0));
+            pari = Pari.creerPariSimple(pariEtIdJoueurDTO.getMise(), chevaux.get(0));
             //pari = new Pari(TypeDePari.MULTI, pariDTO.getMise(), chevaux); // À adapter si tu as une méthode dédiée
         }
 
@@ -207,10 +217,7 @@ public class MainController {
         joueur.setPari(pari);
         joueurRepository.save(joueur);
 
-        omega.setPari(pari);
-        omegaRepository.save(omega);
-
-        return ResponseEntity.ok("Pari créé et assigné avec succès à Omega et au Joueur" + pari.getIdPari() + "\n IdPariOmega : " + omega.getPari().getIdPari());
+        return ResponseEntity.ok("Pari créé et assigné avec succès à Omega et au Joueur" + pari.getIdPari());
     }
 
     @GetMapping("omega/{id}/")

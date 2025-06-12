@@ -18,10 +18,10 @@ public class TerrainServices {
 
     public List<Terrain> initTerrains() {
         Terrain t1 = new Terrain("Longchamp", 1000, Terrain.typeTerrain.HERBE);
-        Terrain t2 = new Terrain("Vincennes", 1600, Terrain.typeTerrain.SABLE);
-        Terrain t3 = new Terrain("Chantilly", 1000, Terrain.typeTerrain.FIBRE);
-        Terrain t4 = new Terrain("Deauville", 1400, Terrain.typeTerrain.HERBE);
-        Terrain t5 = new Terrain("Desert Rouge", 1600, Terrain.typeTerrain.SABLE);
+        Terrain t2 = new Terrain("Vincennes", 1400, Terrain.typeTerrain.SABLE);
+        Terrain t3 = new Terrain("Chantilly", 1800, Terrain.typeTerrain.FIBRE);
+        Terrain t4 = new Terrain("Deauville", 2200, Terrain.typeTerrain.HERBE);
+        Terrain t5 = new Terrain("Desert Rouge", 2600, Terrain.typeTerrain.SABLE);
 
         List<Terrain> listeTerrains = new ArrayList<>();
         listeTerrains.add(t1);

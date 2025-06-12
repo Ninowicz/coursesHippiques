@@ -108,5 +108,9 @@ public class Joueur {
         }
         // Si tout va bien, on ne change rien
         this.pari = pari;
+
+        // On soustrait la mise de la banque du joueur
+        this.argent -= pari.getMise();
+
     }
 }

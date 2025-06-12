@@ -25,6 +25,7 @@ public class Joueur {
     public Joueur(String username, String password) {
         this.username = username;
         this.password = password;
+        this.setArgent(1000);
     }
 
     public Joueur() {

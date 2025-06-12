@@ -17,6 +17,7 @@ public class Joueur {
     private Pari pari;
     private int nbPartiesGagnees;
     private int nbPartiesJouees;
+    private int gainsGeneres;
 
 
     // Constructeurs
@@ -72,6 +73,14 @@ public class Joueur {
 
     public void setNbPartiesJouees(int nbPartiesJouees) {
         this.nbPartiesJouees = nbPartiesJouees;
+    }
+
+    public int getGainsGeneres() {
+        return gainsGeneres;
+    }
+
+    public void setGainsGeneres(int gainsGeneres) {
+        this.gainsGeneres = gainsGeneres;
     }
 
     public void setIdJoueur(int idJoueur) {

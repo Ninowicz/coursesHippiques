@@ -194,7 +194,11 @@ public class MainController {
     @PostMapping("initPariAvecIdJoueur/")
     public ResponseEntity<String> initPariOmega(@RequestBody PariEtIdJoueurDTO pariEtIdJoueurDTO) {
 
+        // Récupérer le joueur a partir de son ID
         Joueur joueur = joueurRepository.findById(pariEtIdJoueurDTO.getIdJoueur()).orElse(null);
+        if(joueur == null){
+            return ResponseEntity.badRequest().body("Joueur introuvable");
+        }
 
         // Récupérer tous les chevaux à partir de leurs IDs
         List<Cheval> chevaux = chevalRepository.findAllById(pariEtIdJoueurDTO.getIdChevaux());

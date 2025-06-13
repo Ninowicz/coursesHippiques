@@ -4,6 +4,8 @@ import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.repositories.JoueurRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JoueurServices {
 
@@ -76,4 +78,27 @@ public class JoueurServices {
         }
     }
 
+    public List<Joueur> recuperationTop3Joueurs () {
+        List<Joueur> joueur = joueurRepository.findAll();
+        return joueur.stream()
+                .sorted((j1, j2) -> Integer.compare(j2.getNbPartiesGagnees(), j1.getNbPartiesGagnees()))
+                .limit(3)
+                .toList();
+    }
+
+    public List<Joueur> recuperationTop20JoueursParties () {
+        List<Joueur> joueur = joueurRepository.findAll();
+        return joueur.stream()
+                .sorted((j1, j2) -> Integer.compare(j2.getNbPartiesGagnees(), j1.getNbPartiesGagnees()))
+                .limit(20)
+                .toList();
+    }
+
+    public List<Joueur> recuperationTop20JoueursGains () {
+        List<Joueur> joueur = joueurRepository.findAll();
+        return joueur.stream()
+                .sorted((j1, j2) -> Integer.compare(j2.getGainsGeneres(), j1.getGainsGeneres()))
+                .limit(20)
+                .toList();
+    }
 }

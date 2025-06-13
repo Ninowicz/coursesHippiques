@@ -49,24 +49,28 @@ public class CourseServices {
         double cotePedigree = 0;
         double coteEtat = 0;
 
+        int moyenneNbCourseGagnees = listeCheval.stream()
+                .mapToInt(Cheval::getNbCourseGagnees).sum()/ listeCheval.size();
+
         for (Cheval cheval : listeCheval){
             switch (cheval.getRace()){
                 case PurSang -> coteRace = 0;
-                case AQPS -> coteRace = 2;
-                case TrotteurFrancais ->  coteRace = 2;
+                case AQPS -> coteRace = 1;
+                case TrotteurFrancais ->  coteRace = 1;
             }
             switch (cheval.getEtatDuCheval()){
                 case Mort -> coteEtat = 1000;
-                case Fatigue -> coteEtat = 3;
-                case Blesse -> coteEtat = 5;
+                case Fatigue -> coteEtat = 1;
+                case Blesse -> coteEtat = 2;
                 case EnForme -> coteEtat = 0;
             }
             switch (cheval.getPedigree()){
                 case 2 -> cotePedigree = 0;
-                case 1 -> cotePedigree = 1;
-                case 0 -> cotePedigree = 2;
+                case 1 -> cotePedigree = 0.5;
+                case 0 -> cotePedigree = 1;
             }
-            coteCoursesGagneesAge = cheval.getAge()/((double) cheval.getNbCourseGagnees() / 2 + cheval.getAge())*5;
+            coteCoursesGagneesAge = Math.min(moyenneNbCourseGagnees,
+                    cheval.getAge()/((double) cheval.getNbCourseGagnees() / 2 + cheval.getAge())) * 3;
             cote = 1 + coteRace + cotePedigree +coteCoursesGagneesAge + coteEtat;
             cheval.setCote(cote);
         }
@@ -104,7 +108,7 @@ public class CourseServices {
             }
 
             //* Premiere ligne malus en fonction de l'age, max age = 10 => malus max
-            //* Deuxieme ligne malus en fonction du ration Poids/Taille (fct affine ax + b)
+            //* Deuxieme ligne malus en fonction du ratio Poids/Taille (fct affine ax + b)
             //* Troisieme ligne malus globaux
             double malus =  (Math.exp((double) cheval.getAge() /10)-Math.exp((double) 2 /10))/10 +
                     Math.abs(a*cheval.getPoids() + b - cheval.getTaille())/10  +

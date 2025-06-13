@@ -221,6 +221,7 @@ public class MainController {
         pariRepository.save(pari);
 
         joueur.setPari(pari);
+        joueur.setArgent(joueur.getArgent() - pari.getMise());
         joueurRepository.save(joueur);
 
         return ResponseEntity.ok("Pari créé et assigné avec succès à Omega et au Joueur" + pari.getIdPari());

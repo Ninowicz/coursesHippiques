@@ -9,14 +9,10 @@ import com.bleu.coursesHippiques.services.ChevalServices;
 import com.bleu.coursesHippiques.services.CourseServices;
 import com.bleu.coursesHippiques.services.JoueurServices;
 import com.bleu.coursesHippiques.services.TerrainServices;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @CrossOrigin
@@ -69,54 +65,12 @@ public class CourseController {
 
             Course course = new Course(nomCourse,listeChevauxCourse,terrainCourse);
             courseRepository.save(course);
+            courseServices.calculerCote(course.getID());
+            courseServices.calculerMalus(course.getID());
+
             listeCourses.add(course);
         }
         return ResponseEntity.ok(listeCourses);
-    }
-    @PostMapping("ajouterCourseFibre")
-    public ResponseEntity<Course> ajouterCourseFibre() {
-        Terrain terrain = new Terrain();
-        terrain.setTypeDeTerrain(Terrain.typeTerrain.FIBRE);
-        terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
-        //terrain.setConditionsAleatoires();
-        terrainServices.setConditionsAleatoires(terrain);
-
-        Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
-
-        return ResponseEntity.ok(test);
-    }
-    @PostMapping("ajouterCourseHerbe")
-    public ResponseEntity<Course> ajouterCourseHerbe() {
-        Terrain terrain = new Terrain();
-        terrain.setTypeDeTerrain(Terrain.typeTerrain.HERBE);
-        terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
-        //terrain.setConditionsAleatoires();
-        terrainServices.setConditionsAleatoires(terrain);
-
-        Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
-
-        return ResponseEntity.ok(test);
-    }
-    @PostMapping("ajouterCourseSable")
-    public ResponseEntity<Course> ajouterCourseSable() {
-        Terrain terrain = new Terrain();
-        terrain.setTypeDeTerrain(Terrain.typeTerrain.SABLE);
-        terrain.setLongueur((int) (Math.random()*(3000-2000) + 2000));
-        //terrain.setConditionsAleatoires();
-        terrainServices.setConditionsAleatoires(terrain);
-        int nbChevaux = (int)(Math.random() * 7);
-        List<Cheval> listeChevaux = new ArrayList<>();
-        for (int i = 0; i<nbChevaux; i++){
-            int numCheval = (int) (Math.random() * chevalRepository.findAll().size());
-        }
-
-
-        System.out.println(chevalRepository.findAll().size());
-
-
-        Course test = courseServices.ajouterCourse("Jesaisaps",chevalRepository.findAll(),terrain);
-
-        return ResponseEntity.ok(test);
     }
 
     @GetMapping("recupererCourse")
@@ -125,12 +79,20 @@ public class CourseController {
         return ResponseEntity.ok(listeCourses);
     }
 
+    @PostMapping("recuperer1Course")
+    public ResponseEntity<Optional<Course>> recuperer1Course(@RequestBody int idCourse) {
+        Optional<Course> course = courseRepository.findById(idCourse);
+        return ResponseEntity.ok(course);
+    }
+
     @PostMapping("testCourse")
     public ResponseEntity<Course> testCourse(@RequestBody int id) {
-        courseServices.calculerMalus(id);
+
         courseServices.calculerCote(id);
+        courseServices.calculerMalus(id);
         courseServices.calculerTempsRealise(id);
         courseServices.calculerBlessure(id);
+        courseServices.calculerVainqueur(id);
         Course course = courseRepository.findById(id).orElse(null);
         for (Cheval c : course.getListeCheval()) {
             chevalRepository.save(c);

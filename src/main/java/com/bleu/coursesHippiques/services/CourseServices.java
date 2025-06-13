@@ -152,15 +152,22 @@ public class CourseServices {
             }
         }
     }
+    public void calculerVainqueur(Integer ID){
+        Course course = courseRepository.getReferenceById(ID);
+        List<Cheval> listeCheval = podium(ID);
+        long idVainqueur = listeCheval.getFirst().getIdCheval();
+        for (Cheval c : course.getListeCheval()){
+            if (c.getIdCheval()==idVainqueur){
+                c.setNbCourseGagnees(c.getNbCourseGagnees()+1);
+            }
+        }
+
+    }
 
     public List<Cheval> podium(Integer ID){
         Course course = courseRepository.getReferenceById(ID);
         List<Cheval> listeCheval = course.getListeCheval();
-        Comparator<Cheval> comparatorTemps = (c1, c2) -> {
-            return (int) (c1.getDernierTemps() -
-                                c2.getDernierTemps());
-        };
-        listeCheval.sort(comparatorTemps);
+        listeCheval.sort(Comparator.comparingDouble(Cheval::getDernierTemps));
         return listeCheval;
     }
 

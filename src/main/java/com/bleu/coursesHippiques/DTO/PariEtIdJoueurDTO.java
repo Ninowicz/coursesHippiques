@@ -1,11 +1,18 @@
 package com.bleu.coursesHippiques.DTO;
 
+import com.bleu.coursesHippiques.beans.Pari;
+
 import java.util.List;
 
 public class PariEtIdJoueurDTO {
     private int idJoueur;
     private double mise;
+    private int typePari;
     private List<Integer> idChevaux;
+
+    public int getTypePari() {
+        return typePari;
+    }
 
     public int getIdJoueur() {
         return idJoueur;

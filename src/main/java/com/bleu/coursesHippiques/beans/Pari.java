@@ -8,8 +8,13 @@ import java.util.List;
 public class Pari {
 
     public enum TypeDePari{
-        SIMPLE
-        // À venir : COUPLE, TRIO, QUINTE...
+        SIMPLE,         // cheval doit finir premier
+        SIMPLE_PLACE,   // cheval doit etre dans les 3 premiers
+        COUPLE_GAGNANT, // 2 chevaux doivent etre dans les 2 premiers
+        COUPLE_PLACE,   // 2 chevaux doivent etre dans les 3 premiers
+        COUPLE_ORDRE,   // 2 chevaux doivent etre dans les 2 premiers dans l'ordre
+        TRIO_GAGNANT,   // 3 chevaux doivent etre dans les 3 premiers
+
     }
 
     // Attributs
@@ -43,7 +48,24 @@ public class Pari {
     public static Pari creerPariSimple(double mise, Cheval cheval) {
         return new Pari(TypeDePari.SIMPLE, mise, List.of(cheval));
     }
-    //public static Pari creerPariDouble(int mise, Cheval cheval){}
+
+    public static Pari creerPariSimplePlace(double mise, Cheval cheval) {
+        return new Pari(TypeDePari.SIMPLE_PLACE, mise, List.of(cheval));
+    }
+
+    public static Pari creerPariCoupleGagnant(double mise, List<Cheval> chevaux) {
+        return new Pari(TypeDePari.COUPLE_GAGNANT, mise, chevaux);
+    }
+
+    public static Pari creerPariCouplePlace(double mise, List<Cheval> chevaux) {
+        return new Pari(TypeDePari.COUPLE_PLACE, mise, chevaux);
+    }
+    public static Pari creerPariCoupleOrdre(double mise, List<Cheval> chevaux) {
+        return new Pari(TypeDePari.COUPLE_ORDRE, mise, chevaux);
+    }
+    public static Pari creerPariTrioGagnant(double mise, List<Cheval> chevaux) {
+        return new Pari(TypeDePari.TRIO_GAGNANT, mise, chevaux);
+    }
 
 
 

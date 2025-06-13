@@ -328,7 +328,26 @@ public class MainController {
     }
 
 
+    @GetMapping("recuperation/top/3/joueurs")
+    public ResponseEntity<List<Joueur>> recuperationTop3Joueurs() {
+        List<Joueur> top3Joueurs = joueurServices.recuperationTop3Joueurs();
+        return ResponseEntity.ok(top3Joueurs);
+    }
 
+    @GetMapping("recuperation/top/20/joueurs/chevaux")
+    public ResponseEntity<ClassementTop20DTO> recuperationTop20JoueursChevaux() {
+        List<Joueur> top20JoueursGains = joueurServices.recuperationTop20JoueursGains();
+        List<Joueur> top20JoueursParties = joueurServices.recuperationTop20JoueursParties();
+        List<Cheval> top20ChevalCourses = chevalServices.recuperationTop20ChevalCourses();
+
+        ClassementTop20DTO top20 = new ClassementTop20DTO(
+                top20JoueursGains,
+                top20JoueursParties,
+                top20ChevalCourses
+        );
+
+        return ResponseEntity.ok(top20);
+    }
 
 
 

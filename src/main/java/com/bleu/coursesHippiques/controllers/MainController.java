@@ -30,8 +30,9 @@ public class MainController {
     private final ResultatServices resultatServices;
     private final PariServices pariServices;
     private final CourseServices courseServices;
+    private final JoueurServices joueurServices;
 
-    public MainController(CourseRepository courseRepository, ChevalRepository chevalRepository, TerrainRepository terrainRepository, JoueurRepository joueurRepository, ChevalServices chevalServices, TerrainServices terrainsServices, PariRepository pariRepository, ResultatRepository resultatRepository, ResultatServices resultatServices, PariServices pariServices, CourseServices courseServices) {
+    public MainController(CourseRepository courseRepository, ChevalRepository chevalRepository, TerrainRepository terrainRepository, JoueurRepository joueurRepository, ChevalServices chevalServices, TerrainServices terrainsServices, PariRepository pariRepository, ResultatRepository resultatRepository, ResultatServices resultatServices, PariServices pariServices, CourseServices courseServices, JoueurServices joueurServices) {
 
         // Repository
         this.courseRepository = courseRepository;
@@ -46,6 +47,7 @@ public class MainController {
         this.resultatServices = resultatServices;
         this.pariServices = pariServices;
         this.courseServices = courseServices;
+        this.joueurServices = joueurServices;
     }
 
     @PostMapping("initBaseDeDonnee")
@@ -128,8 +130,26 @@ public class MainController {
         return ResponseEntity.ok("Pari créé et assigné avec succès à Omega et au Joueur" + pari.getIdPari());
     }
 
+    @GetMapping("recuperation/top/3/joueurs")
+    public ResponseEntity<List<Joueur>> recuperationTop3Joueurs() {
+        List<Joueur> top3Joueurs = joueurServices.recuperationTop3Joueurs();
+        return ResponseEntity.ok(top3Joueurs);
+    }
 
+    @GetMapping("recuperation/top/20/joueurs/chevaux")
+    public ResponseEntity<ClassementTop20DTO> recuperationTop20JoueursChevaux() {
+        List<Joueur> top20JoueursGains = joueurServices.recuperationTop20JoueursGains();
+        List<Joueur> top20JoueursParties = joueurServices.recuperationTop20JoueursParties();
+        List<Cheval> top20ChevalCourses = chevalServices.recuperationTop20ChevalCourses();
 
+        ClassementTop20DTO top20 = new ClassementTop20DTO(
+                top20JoueursGains,
+                top20JoueursParties,
+                top20ChevalCourses
+        );
+
+        return ResponseEntity.ok(top20);
+    }
 
 
 

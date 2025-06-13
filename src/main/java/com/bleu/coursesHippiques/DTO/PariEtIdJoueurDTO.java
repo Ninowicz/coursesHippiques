@@ -7,10 +7,10 @@ import java.util.List;
 public class PariEtIdJoueurDTO {
     private int idJoueur;
     private double mise;
-    private int typePari; // correspond à l'énumération TypeDePari
+    private String typePari; // correspond à l'énumération TypeDePari
     private List<Integer> idChevaux;
 
-    public int getTypePari() {
+    public String getTypePari() {
         return typePari;
     }
 

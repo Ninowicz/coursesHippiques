@@ -100,22 +100,22 @@ public class MainController {
         // Créer le Pari selon le nombre de chevaux
         Pari pari;
         switch (pariEtIdJoueurDTO.getTypePari()) {
-            case 1: // Simple
+            case "SIMPLE": // Simple
                 pari = Pari.creerPariSimple(pariEtIdJoueurDTO.getMise(), chevaux.get(0));
                 break;
-            case 2: // Simple Place
+            case "SIMPLE_PLACE": // Simple Place
                 pari = Pari.creerPariSimplePlace(pariEtIdJoueurDTO.getMise(), chevaux.get(0));
                 break;
-            case 3: // Couple Gagnant
+            case "COUPLE_GAGNANT": // Couple Gagnant
                 pari = Pari.creerPariCoupleGagnant(pariEtIdJoueurDTO.getMise(), chevaux);
                 break;
-            case 4: // Couple Place
+            case "COUPLE_PLACE": // Couple Place
                 pari = Pari.creerPariCouplePlace(pariEtIdJoueurDTO.getMise(), chevaux);
                 break;
-            case 5: // Couple Ordre
+            case "COUPLE_ORDRE": // Couple Ordre
                 pari = Pari.creerPariCoupleOrdre(pariEtIdJoueurDTO.getMise(), chevaux);
                 break;
-            case 6: // Trio Gagnant
+            case "TRIO_GAGNANT": // Trio Gagnant
                 pari = Pari.creerPariTrioGagnant(pariEtIdJoueurDTO.getMise(), chevaux);
                 break;
             default:

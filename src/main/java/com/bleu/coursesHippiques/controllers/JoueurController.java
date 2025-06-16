@@ -2,6 +2,7 @@ package com.bleu.coursesHippiques.controllers;
 
 import com.bleu.coursesHippiques.DTO.PasswordUpdateDTO;
 import com.bleu.coursesHippiques.DTO.PseudoUpdateDTO;
+import com.bleu.coursesHippiques.DTO.RetraitDTO;
 import com.bleu.coursesHippiques.beans.Joueur;
 import com.bleu.coursesHippiques.repositories.JoueurRepository;
 import com.bleu.coursesHippiques.services.JoueurServices;
@@ -110,6 +111,31 @@ public class JoueurController {
 
         response.put("message", "Pseudo mis à jour !");
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("retirer/argent")
+    public ResponseEntity<Map<String, String>> retirerArgent(@RequestBody RetraitDTO dto) {
+
+        Joueur joueur = joueurServices.recuperationInfoJoueur(dto.getId());
+        Map<String, String> response = new HashMap<>();
+
+        if (joueur == null) {
+            response.put("message", "Joueur non trouvé");
+            return ResponseEntity.status(404).body(response);
+        }
+
+        if (dto.getArgent() < 0 || dto.getArgent() > joueur.getCompteBancaire()) {
+            response.put("message", "Montant invalide");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        joueur.setCompteBancaire(joueur.getCompteBancaire() - dto.getArgent());
+        joueur.setArgent(joueur.getArgent() + dto.getArgent());
+        joueurRepository.save(joueur);
+
+        response.put("message", "Retrait effectué avec succès");
+        return ResponseEntity.ok(response);
+
     }
 
 }

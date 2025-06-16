@@ -13,6 +13,7 @@ public class Joueur {
     private String username;
     private String password;
     private double argent;
+    private double compteBancaire;
     @OneToOne
     private Pari pari;
     private int nbPartiesGagnees;
@@ -26,6 +27,7 @@ public class Joueur {
         this.username = username;
         this.password = password;
         this.setArgent(1000);
+        this.compteBancaire = randomDouble(100,5000);
     }
 
     public Joueur() {
@@ -33,8 +35,11 @@ public class Joueur {
 
 // Methodes
 
-    // Getter Setter
+    private double randomDouble(double min, double max) {
+        return (Math.random() * (max - min)) + min;
+    }
 
+    // Getter Setter
 
     public String getUsername() {
         return username;
@@ -94,6 +99,14 @@ public class Joueur {
 
     public Pari getPari() {
         return pari;
+    }
+
+    public double getCompteBancaire() {
+        return compteBancaire;
+    }
+
+    public void setCompteBancaire(double compteBancaire) {
+        this.compteBancaire = compteBancaire;
     }
 
     public void setPari(Pari pari) {

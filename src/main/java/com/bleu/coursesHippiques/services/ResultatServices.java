@@ -97,7 +97,7 @@ public class ResultatServices {
 
     private void traitementPariCoupleGagnant(Resultat resultat, Pari pari, List<Cheval> classement) {
         // Le pari etant plus simple, un coefficient de gain est appliqué pour réduire le gain par rapport à un pari simple gagnant
-        double coefficientGain = 2.5; // Coefficient de gain pour un pari couple gagnant
+        double coefficientGain = 1.6; // Coefficient de gain pour un pari couple gagnant
 
         // Verification de la validité du classement
         if (classement == null || classement.size() < 2) {
@@ -125,7 +125,7 @@ public class ResultatServices {
 
     private void traitementPariCouplePlace(Resultat resultat, Pari pari, List<Cheval> classement) {
         // Le pari etant plus simple, un coefficient de gain est appliqué pour réduire le gain par rapport à un pari simple gagnant
-        double coefficientGain = 1.8; // Coefficient de gain pour un pari couple placé
+        double coefficientGain = 1.3; // Coefficient de gain pour un pari couple placé
 
 
         // Verification de la validité du classement
@@ -161,7 +161,7 @@ public class ResultatServices {
 
     private void traitementPariCoupleOrdre(Resultat resultat, Pari pari, List<Cheval> classement) {
         // Le pari etant plus simple, un coefficient de gain est appliqué pour réduire le gain par rapport à un pari simple gagnant
-        double coefficientGain = 4; // Coefficient de gain pour un pari couple ordre
+        double coefficientGain = 2; // Coefficient de gain pour un pari couple ordre
 
         // Verification de la validité du classement
         if (classement == null || classement.size() < 2) {
@@ -189,7 +189,7 @@ public class ResultatServices {
 
     private void traitementPariTrioGagnant(Resultat resultat, Pari pari, List<Cheval> classement) {
         // Le pari etant plus simple, un coefficient de gain est appliqué pour réduire le gain par rapport à un pari simple gagnant
-        double coefficientGain = 5; // Coefficient de gain pour un pari trio gagnant
+        double coefficientGain = 1.8; // Coefficient de gain pour un pari trio gagnant
 
         // Verification de la validité du classement
         if (classement == null || classement.size() < 3) {

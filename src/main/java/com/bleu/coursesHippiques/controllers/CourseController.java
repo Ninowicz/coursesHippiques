@@ -55,7 +55,7 @@ public class CourseController {
             terrainServices.setConditionsAleatoires(terrainCourse);
             String nomCourse = "Course n°" + (i + 1) + "; Terrain = " + terrainCourse.getNomTerrain() + "; Meteo = " + terrainCourse.getMeteoEvenement();
 
-            int nbChevaux = (int) (Math.random() * (8 - 4) )+ 4;
+            int nbChevaux = (int) (Math.random() * (9 - 4) )+ 4;
             List<Cheval> listeChevaux = chevalRepository.findAll();
             Collections.shuffle(listeChevaux);
             List<Cheval> listeChevauxCourse = new ArrayList<>();

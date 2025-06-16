@@ -64,61 +64,61 @@ public class TerrainServices {
 
         if(terrain.getMeteoEvenement() == Terrain.meteo.NORMALE){
             if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.HERBE){
-                terrain.setTauxDeBlessures(10);
-            }
-            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE){
-                terrain.setTauxDeBlessures(15);
-            }
-            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE){
                 terrain.setTauxDeBlessures(5);
             }
+            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE){
+                terrain.setTauxDeBlessures(7);
+            }
+            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE){
+                terrain.setTauxDeBlessures(2);
+            }
             else{
-                terrain.setTauxDeBlessures(15);
+                terrain.setTauxDeBlessures(7);
             }
         }
 
         if(terrain.getMeteoEvenement() == Terrain.meteo.GRAND_SOLEIL){
             if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.HERBE){
-                terrain.setTauxDeBlessures(10);
-            }
-            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE){
-                terrain.setTauxDeBlessures(10);
-            }
-            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE){
                 terrain.setTauxDeBlessures(5);
             }
+            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE){
+                terrain.setTauxDeBlessures(5);
+            }
+            else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE){
+                terrain.setTauxDeBlessures(2);
+            }
             else{
-                terrain.setTauxDeBlessures(10);
+                terrain.setTauxDeBlessures(5);
             }
         }
 
         if(terrain.getMeteoEvenement() == Terrain.meteo.PLUIE){
             if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.HERBE){
-                terrain.setTauxDeBlessures(25);
+                terrain.setTauxDeBlessures(12);
             }
             else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE){
-                terrain.setTauxDeBlessures(30);
+                terrain.setTauxDeBlessures(15);
             }
             else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE){
-                terrain.setTauxDeBlessures(10);
+                terrain.setTauxDeBlessures(5);
             }
             else{
-                terrain.setTauxDeBlessures(15);
+                terrain.setTauxDeBlessures(7);
             }
         }
 
         if(terrain.getMeteoEvenement() == Terrain.meteo.ORAGE){
             if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.HERBE){
-                terrain.setTauxDeBlessures(40);
+                terrain.setTauxDeBlessures(20);
             }
             else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.SABLE){
-                terrain.setTauxDeBlessures(45);
+                terrain.setTauxDeBlessures(20);
             }
             else if(terrain.getTypeDeTerrain() == Terrain.typeTerrain.FIBRE){
-                terrain.setTauxDeBlessures(15);
+                terrain.setTauxDeBlessures(7);
             }
             else{
-                terrain.setTauxDeBlessures(40);
+                terrain.setTauxDeBlessures(20);
             }
         }
 

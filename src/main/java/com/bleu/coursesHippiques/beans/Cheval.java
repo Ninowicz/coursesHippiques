@@ -23,7 +23,7 @@ public class Cheval {
     private Race race;
     private double taille;
     private int poids;
-    private int vitesseMax;
+    private double vitesseMax;
     private double acceleration;
     private int nbCourseGagnees;
     private CouleurDeLaRobe couleurDeLaRobe;
@@ -152,8 +152,8 @@ public class Cheval {
         this.race = Race.raceAleatoire();
         this.taille = randomDouble(1.5, 1.8);
         this.poids = randomInt(300, 800);
-        this.vitesseMax = randomInt(55, 60);
-        this.acceleration = randomDouble(1.5, 2);
+        this.vitesseMax = randomDouble(55, 60);
+        this.acceleration = randomDouble(1.7, 2);
         this.nbCourseGagnees = 0; //randomInt(0, 62)
         this.couleurDeLaRobe = CouleurDeLaRobe.couleurDeLaRobeAleatoire();
         this.pedigree = randomInt(0, 2);
@@ -212,7 +212,7 @@ public class Cheval {
         this.poids = poids;
     }
 
-    public int getVitesseMax() {
+    public double getVitesseMax() {
         return vitesseMax;
     }
 

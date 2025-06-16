@@ -151,4 +151,38 @@ public class MainController {
         return ResponseEntity.ok(top20);
     }
 
+    @PostMapping("setNbVictoire")
+    public void setNbVictoire(){
+        int nbCourseJouees = 60;
+
+        for (int i = 0; i < nbCourseJouees; i++) {
+
+            List<Terrain> listeTerrains = terrainRepository.findAll();
+            Collections.shuffle(listeTerrains);
+            Terrain terrainCourse = listeTerrains.getFirst();
+            terrainsServices.setConditionsAleatoires(terrainCourse);
+            String nomCourse = "Course n°" + (i + 1);
+
+            int nbChevaux = (int) (Math.random() * (9 - 4) )+ 4;
+            List<Cheval> listeChevaux = chevalRepository.findAll();
+            Collections.shuffle(listeChevaux);
+            List<Cheval> listeChevauxCourse = new ArrayList<>();
+            for (int k = 0; k < nbChevaux; k++){
+                listeChevauxCourse.add(listeChevaux.get(k));
+            }
+
+            Course course = new Course(nomCourse,listeChevauxCourse,terrainCourse);
+
+            courseRepository.save(course);
+            courseServices.calculerCote(course.getID());
+            courseServices.calculerMalus(course.getID());
+            courseServices.calculerTempsRealise(course.getID());
+            courseServices.calculerVainqueur(course.getID());
+
+            for (Cheval c : course.getListeCheval()) {
+                chevalRepository.save(c);
+            }
+        }
+    }
+
 }

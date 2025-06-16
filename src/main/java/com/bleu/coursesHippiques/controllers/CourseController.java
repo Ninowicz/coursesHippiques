@@ -93,8 +93,10 @@ public class CourseController {
         courseServices.calculerTempsRealise(id);
         courseServices.calculerBlessure(id);
         courseServices.calculerVainqueur(id);
+
         Course course = courseRepository.findById(id).orElse(null);
         for (Cheval c : course.getListeCheval()) {
+            System.out.println(c.getNom());
             chevalRepository.save(c);
         }
         return ResponseEntity.ok(course);

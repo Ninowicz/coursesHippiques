@@ -131,7 +131,6 @@ public class CourseServices {
                 double accelerationReelle = cheval.getAcceleration() - rdAcceleration - cheval.getMalus();
                 double distanceSup = Math.min(i*accelerationReelle,cheval.getVitesseMax())*1000/(60*60)*rdAleaVMax;
                 listeDistanceParcourue.add((int) ( distanceSup + Collections.max(listeDistanceParcourue) ));
-                System.out.println(distanceSup);
                 i++;
             }
 
@@ -158,7 +157,7 @@ public class CourseServices {
     }
     public void calculerVainqueur(Integer ID){
         Course course = courseRepository.getReferenceById(ID);
-        List<Cheval> listeCheval = podium(ID);
+        List<Cheval> listeCheval = course.getListeCheval();
         long idVainqueur = listeCheval.getFirst().getIdCheval();
         for (Cheval c : course.getListeCheval()){
             if (c.getIdCheval()==idVainqueur){
@@ -170,8 +169,10 @@ public class CourseServices {
 
     public List<Cheval> podium(Integer ID){
         Course course = courseRepository.getReferenceById(ID);
+        calculerVainqueur(ID);
         List<Cheval> listeCheval = course.getListeCheval();
         listeCheval.sort(Comparator.comparingDouble(Cheval::getDernierTemps));
+
         return listeCheval;
     }
 

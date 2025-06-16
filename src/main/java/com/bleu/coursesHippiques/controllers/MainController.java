@@ -177,8 +177,6 @@ public class MainController {
             courseServices.calculerCote(course.getID());
             courseServices.calculerMalus(course.getID());
             courseServices.calculerTempsRealise(course.getID());
-            courseServices.calculerVainqueur(course.getID());
-
             for (Cheval c : course.getListeCheval()) {
                 chevalRepository.save(c);
             }

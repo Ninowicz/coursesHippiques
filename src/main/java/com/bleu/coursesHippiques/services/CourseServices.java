@@ -169,9 +169,9 @@ public class CourseServices {
 
     public List<Cheval> podium(Integer ID){
         Course course = courseRepository.getReferenceById(ID);
-        calculerVainqueur(ID);
         List<Cheval> listeCheval = course.getListeCheval();
         listeCheval.sort(Comparator.comparingDouble(Cheval::getDernierTemps));
+        calculerVainqueur(ID);
 
         return listeCheval;
     }
